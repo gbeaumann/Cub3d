@@ -1,6 +1,9 @@
 NAME =	cub3d
 CC =	gcc
-SRC =	main.c
+SRC =	src/get_next_line.c \
+		src/get_next_line_utils.c \
+		src/readmap.c
+
 FLAGS =	-Wall -Werror -Wextra -g3 -fsanitize=address -fno-omit-frame-pointer
 OBJ =	$(SRC:.c=.o)
 
