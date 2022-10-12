@@ -1,6 +1,6 @@
 NAME =	cub3d
 CC =	gcc
-SRC =	main.c
+SRC =	rotata.c
 FLAGS =	-Wall -Werror -Wextra -g3 -fsanitize=address -fno-omit-frame-pointer
 OBJ =	$(SRC:.c=.o)
 
