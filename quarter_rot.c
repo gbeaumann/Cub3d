@@ -9,7 +9,7 @@ int		quarter_1(t_data *img, float pdx, float pdy)
 	{
 		pdx = sin(img->angle) * len;
 		pdy = cos(img->angle) * len;
-		my_mlx_pixel_put(img, img->x + pdx, img->y - pdy, 0x00FF0000);
+		mlx_pixel_put(img->mlx, img->mlx_win, img->x + pdx, img->y - pdy, 0x00FF0000);
 		len++;
 	}
 	img->pdx = pdx;
@@ -26,7 +26,7 @@ int		quarter_2(t_data *img, float pdx, float pdy)
 	{
 		pdx = sin(img->angle) * len;
 		pdy = cos(img->angle) * len;
-		my_mlx_pixel_put(img, img->x + pdx, img->y + pdy, 0x00FF0000);
+		mlx_pixel_put(img->mlx, img->mlx_win, img->x + pdx, img->y + pdy, 0x00FF0000);
 		len++;
 	}
 	img->pdx = pdx;
@@ -43,7 +43,7 @@ int		quarter_3(t_data *img, float pdx, float pdy)
 	{
 		pdx = sin(img->angle) * len;
 		pdy = cos(img->angle) * len;
-		my_mlx_pixel_put(img, img->x - pdx, img->y + pdy, 0x00FF0000);
+		mlx_pixel_put(img->mlx, img->mlx_win, img->x - pdx, img->y + pdy, 0x00FF0000);
 		len++;
 	}
 	img->pdx = pdx;
@@ -60,7 +60,7 @@ int		quarter_4(t_data *img, float pdx, float pdy)
 	{
 		pdx = sin(img->angle) * len;
 		pdy = cos(img->angle) * len;
-		my_mlx_pixel_put(img, img->x - pdx, img->y - pdy, 0x00FF0000);
+		mlx_pixel_put(img->mlx, img->mlx_win, img->x - pdx, img->y - pdy, 0x00FF0000);
 		len++;
 	}
 	img->pdx = pdx;

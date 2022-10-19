@@ -14,10 +14,9 @@ void	clear_quarter_1(t_data *img)
 	{
 		pdx = sin(img->angle) * len;
 		pdy = cos(img->angle) * len;
-		my_mlx_pixel_put(img, img->x + pdx, img->y - pdy, 0);
+		mlx_pixel_put(img->mlx, img->mlx_win, img->x + pdx, img->y - pdy, 0);
 		len++;
 	}
-	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
 }
 
 void	clear_quarter_2(t_data *img)
@@ -33,10 +32,9 @@ void	clear_quarter_2(t_data *img)
 	{
 		pdx = sin(img->angle) * len;
 		pdy = cos(img->angle) * len;
-		my_mlx_pixel_put(img, img->x + pdx, img->y + pdy, 0);
+		mlx_pixel_put(img->mlx, img->mlx_win, img->x + pdx, img->y + pdy, 0);
 		len++;
 	}
-	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
 }
 
 void	clear_quarter_3(t_data *img)
@@ -52,10 +50,9 @@ void	clear_quarter_3(t_data *img)
 	{
 		pdx = sin(img->angle) * len;
 		pdy = cos(img->angle) * len;
-		my_mlx_pixel_put(img, img->x - pdx, img->y + pdy, 0);
+		mlx_pixel_put(img->mlx, img->mlx_win, img->x - pdx, img->y + pdy, 0);
 		len++;
 	}
-	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
 }
 
 void	clear_quarter_4(t_data *img)
@@ -71,10 +68,9 @@ void	clear_quarter_4(t_data *img)
 	{
 		pdx = sin(img->angle) * len;
 		pdy = cos(img->angle) * len;
-		my_mlx_pixel_put(img, img->x - pdx, img->y - pdy, 0);
+		mlx_pixel_put(img->mlx, img->mlx_win, img->x - pdx, img->y - pdy, 0);
 		len++;
 	}
-	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
 }
 
 void	clear(t_data *img)

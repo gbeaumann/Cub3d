@@ -14,7 +14,7 @@ void	my_mlx_pixel_put(t_data *img, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int	init_player(t_data *img)
+int	init_player(t_data *img, t_minimap *minimap)
 {
 	int	y;
 
@@ -27,33 +27,13 @@ int	init_player(t_data *img)
 	y = img->y;
 	while (y > img->y - 20)
 	{
-		my_mlx_pixel_put(img, img->x, y, 0x00FF0000);
+		mlx_pixel_put(img->mlx, img->mlx_win, img->x, y, 0x00FF0000);
 		y--;
 	}
-	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
 	return (0);
 }
 
-/*void	clear(t_data *img)
-{
-	int		len;
-	float	pdx;
-	float	pdy;
-
-	len = 0;
-	pdx = img->pdx;
-	pdy = img->pdy;
-	while (len < 20)
-	{
-		pdx = sin(img->angle) * len;
-		pdy = cos(img->angle) * len;
-		my_mlx_pixel_put(img, img->x + pdx, img->y + pdy, 0);
-		len++;
-	}
-	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
-}*/
-
-int	player_move(int keycode, t_data *img)
+int	player_move(int keycode, t_data *img, t_minimap *minimap)
 {
 	float	pdx;
 	float	pdy;
@@ -65,21 +45,34 @@ int	player_move(int keycode, t_data *img)
 		rotation_right(img, pdx, pdy);
 	if (keycode == 13)
 		forward(img, pdx, pdy);
-	my_mlx_pixel_put(img, 10, 10, 0x00FF0000);
-	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
 	return (0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
-	t_data	img;
+	t_data				img;
+	static t_read_map	gnl;
+	t_minimap			minimap;
+	char				*map_gnl;
+	int					fd;
 	
+	// read map
+	fd = open(argv[1], O_RDONLY);
+	map_gnl = get_next_line(fd, &minimap, &gnl);
+	printf("minimap height: %d\nminimap width: %d\n", minimap.map_width, minimap.map_height);
+
 	// initialisation mlx
 	img.mlx = mlx_init();
-	img.mlx_win = mlx_new_window(img.mlx, 900, 600, "Hello world!");
-	img.img = mlx_new_image(img.mlx, 900, 600);
+	img.mlx_win = mlx_new_window(img.mlx, (minimap.map_width * 60), (minimap.map_height * 60), "Hello world!");
+	img.img = mlx_new_image(img.mlx,  (minimap.map_width * 60), (minimap.map_height * 60));
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	init_player(&img);
+	// minimap
+	minimap.sprite_height = 60;
+	minimap.sprite_width = 60;
+	minimap.map = ft_split(map_gnl, '\n');
+	print_walls(&minimap, &img);
+
+	init_player(&img, &minimap);
 	mlx_hook(img.mlx_win, 2, 0, player_move, &img);
 	mlx_hook(img.mlx_win, 17, 1L << 5, ft_clic_close, &img);
 	mlx_loop(img.mlx);

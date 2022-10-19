@@ -3,7 +3,9 @@ CC =	gcc
 SRC =	rotata.c\
 		keycode.c\
 		quarter_rot.c\
-		clear.c
+		clear.c\
+		./test_map/get_next_line.c\
+		./test_map/print_map.c\
 		
 FLAGS =	-Wall -Werror -Wextra -g3 -fsanitize=address -fno-omit-frame-pointer
 OBJ =	$(SRC:.c=.o)

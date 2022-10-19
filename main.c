@@ -143,10 +143,12 @@ void print_player(t_data *img)
 
 int	main(void)
 {
-	t_data	img;
+	t_data				img;
+	static t_read_map	gnl;
+	t_minimap			mini_map;
+
 	img.x = 450;
 	img.y = 300;
-
 	img.mlx = mlx_init();
 	img.mlx_win = mlx_new_window(img.mlx, 900, 600, "Hello world!");
 	img.img = mlx_new_image(img.mlx, 900, 600);
