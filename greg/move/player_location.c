@@ -15,13 +15,6 @@
 
 int check_cell(t_data *img)
 {
-    printf("new check cell:\n");
-    printf("cell_x: %Lf\n", img->cell_x);
-    printf("cell_y: %Lf\n\n", img->cell_y);
-    printf("map_y: %d\n", img->map_y);
-    printf("map_x: %d\n", img->map_x);
-
-
     //entering a cell from the south (y = 0)
     if (img->cell_y < 0)
     {

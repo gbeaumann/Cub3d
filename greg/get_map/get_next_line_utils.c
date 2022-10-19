@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 13:40:23 by mchalard          #+#    #+#             */
-/*   Updated: 2022/10/15 15:11:03 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/10/19 20:47:00 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (s3);
 }
 
-char	*ft_strdup(char *s1)
+/*char	*ft_strdup(char *s1)
 {
 	int		i;
 	char	*ptr;
@@ -80,4 +80,4 @@ char	*ft_strdup(char *s1)
 	}
 	ptr[i] = '\0';
 	return (ptr);
-}
+}*/

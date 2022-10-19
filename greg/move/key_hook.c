@@ -21,10 +21,11 @@ int	player_move(int keycode, t_data *img)
 		forward(img, pdx, pdy);
 	if (keycode == 1)
 		backward(img, pdx, pdy);
-	printf("angle: %Lf\n", img->angle);
-	printf("quarter: %d\n\n", img->quarter);
-
 	check_cell(img);
+	printf("quarter %d\n", img->quarter);
+	cal_x_dist(img);
+	//cal_y_dist(img);
+	printf("\n");
 	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
 	return (0);
 }

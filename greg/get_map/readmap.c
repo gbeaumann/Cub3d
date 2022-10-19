@@ -58,7 +58,7 @@ void    display_map(char **map)
     }
 }
 
-int open_map(char *filename)
+char ** open_map(char *filename)
 {
     char    *path;
     int     fd;
@@ -68,7 +68,7 @@ int open_map(char *filename)
     if((fd = open(path, O_RDONLY)) < 0)
     {
         printf("Could not open file: %s\n", filename);
-        return (1);
+        return (NULL);
     }
     else
         printf ("File: %s succesfully opened\n", filename);
@@ -76,5 +76,5 @@ int open_map(char *filename)
     map = read_map(fd);
     display_map(map);
     close(fd);   
-    return (0); 
+    return (map); 
 }
