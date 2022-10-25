@@ -1,17 +1,28 @@
 #include	"cube.h"
 
-int	main(void)
+
+int	main(int argc, char **argv)
 {
-	t_data	img;
-	
+	t_data	data;
+	int		fd;
+	char	*map_gnl;
+
+	// init map
+	fd = open(argv[1], O_RDONLY);
+	map_gnl = get_next_line(fd, &data);
+	data.map.map = ft_split(map_gnl, '\n');
 	// initialisation mlx
-	img.mlx = mlx_init();
-	img.mlx_win = mlx_new_window(img.mlx, 900, 600, "Hello world!");
-	img.img = mlx_new_image(img.mlx, 900, 600);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	init_player(&img);
-	mlx_hook(img.mlx_win, 2, 0, player_move, &img);
-	mlx_hook(img.mlx_win, 17, 1L << 5, ft_clic_close, &img);
-	mlx_loop(img.mlx);
-}
+	data.mlx.mlx = mlx_init();
+	printf ("coucou\n");
+	data.mlx.mlx_win = mlx_new_window(data.mlx.mlx, (data.map.map_width * 60), (data.map.map_height * 60), "Hello world!");
+	data.mlx.img = mlx_new_image(data.mlx.mlx, (data.map.map_width * 60), (data.map.map_height * 60));
+	data.mlx.addr = mlx_get_data_addr(data.mlx.img, &data.mlx.bits_per_pixel, &data.mlx.line_length, &data.mlx.endian);
+	print_walls(&data);
+
+	init_player(&data);
+
+	mlx_hook(data.mlx.mlx_win, 2, 0, player_move, &data);
+	mlx_hook(data.mlx.mlx_win, 17, 1L << 5, ft_clic_close, &data);
+	mlx_loop(data.mlx.mlx);
 	
+}

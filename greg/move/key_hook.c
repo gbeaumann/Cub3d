@@ -1,31 +1,31 @@
 #include "../cube.h"
 
-int	ft_clic_close(t_data *img)
+int	ft_clic_close(t_data *data)
 {
-	mlx_destroy_window(img->mlx, img->mlx_win);
+	mlx_destroy_window(data->mlx.mlx, data->mlx.mlx_win);
 	exit (0);
 }
 
-int	player_move(int keycode, t_data *img)
+int	player_move(int keycode, t_data *data)
 {
 	float	pdx;
 	float	pdy;
 	
-	clear(img);
+	clear(data);
 
 	if (keycode == 123)
-		rotation_left(img, pdx, pdy);
+		rotation_left(data, pdx, pdy);
 	if (keycode == 124)
-		rotation_right(img, pdx, pdy);
+		rotation_right(data, pdx, pdy);
 	if (keycode == 13)
-		forward(img, pdx, pdy);
+		forward(data, pdx, pdy);
 	if (keycode == 1)
-		backward(img, pdx, pdy);
-	check_cell(img);
-	printf("quarter %d\n", img->quarter);
-	cal_x_dist(img);
-	//cal_y_dist(img);
+		backward(data, pdx, pdy);
+	check_cell(data);
+	printf("quarter %d\n", data->player.quarter);
+	cal_x_dist(data);
+	//cal_y_dist(data);
 	printf("\n");
-	mlx_put_image_to_window(img->mlx, img->mlx_win, img->img, 0, 0);
+	mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win, data->mlx.img, 0, 0);
 	return (0);
 }

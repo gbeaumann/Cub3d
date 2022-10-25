@@ -13,38 +13,38 @@
 //map_y => y coordinate of the player position in map;
 //map_x => x coordinate of the player position in map;
 
-int check_cell(t_data *img)
+int check_cell(t_data *data)
 {
     //entering a cell from the south (y = 0)
-    if (img->cell_y < 0)
+    if (data->player.cell_y < 0)
     {
         printf("You have entered a new cell from the south\n");
-        img->cell_y = 60 - (img->cell_y * -1);
-        img->map_y--;
+        data->player.cell_y = 60 - (data->player.cell_y * -1);
+        data->player.map_y--;
     }
 
     //entering a cell from the east side (x = 0)
-    if (img->cell_x < 0)
+    if (data->player.cell_x < 0)
     {
         printf("You have entered a new cell from the East\n");
-        img->cell_x = 60 - (img->cell_x * -1);
-        img->map_x--;
+        data->player.cell_x = 60 - (data->player.cell_x * -1);
+        data->player.map_x--;
     }
 
     //entering a cell from the north (y = 60)
-    if (img->cell_y > 60)
+    if (data->player.cell_y > 60)
     {
         printf("You have entered a new cell from the north\n");
-        img->cell_y = (img->cell_y - 60);
-        img->map_y++;
+        data->player.cell_y = (data->player.cell_y - 60);
+        data->player.map_y++;
     }
 
     //entering a cell from the west (x = 60)
-    if (img->cell_x > 60)
+    if (data->player.cell_x > 60)
     {
         printf("You have entered a new cell from the west\n");
-        img->cell_x = (img->cell_y - 60);
-        img->map_x++;
+        data->player.cell_x = (data->player.cell_y - 60);
+        data->player.map_x++;
     }
     return (0);
 }

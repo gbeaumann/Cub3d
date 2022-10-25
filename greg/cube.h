@@ -1,47 +1,113 @@
 #ifndef		CUB3D_H
 # define	CUB3D_H
 
+# define	BUFFER_SIZE 10
+
 # include	"./minilibix/mlx.h"
-# include 	"get_next_line.h"
+# include	"./libft/libft.h"
+//# include 	"get_next_line.h"
 # include	<stdio.h>
 # include	<stdlib.h>
 # include	<math.h>
+# include	<fcntl.h>
 //# define		PI 3.141592653589793
 # define		PI 3.141593
 
-typedef struct	s_data {
+typedef struct s_mlxinit {
+
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	void	*mlx;
+	void	*mlx_win;
+}					t_mlxinit;
+
+typedef struct s_minimap
+{
+	int		map_height;
+	int		map_width;
 	char	**map;
+	void	*sprite;
+	int		sprite_height;
+	int		sprite_width;
+}		t_minimap;
+
+typedef struct s_player {
+
 	long double	x;
 	long double	y;
 	long double cell_x;
 	long double cell_y;
 	int			map_x;
 	int			map_y;
-	long double close_x_v;
-	long double close_y_v;
-	long double close_x_h;
-	long double close_y_h;
-	void	*mlx;
-	void	*mlx_win;
 	long double	angle;
 	long double tmp_angle;
 	long double	pdx;
 	long double	pdy;
-	int		quarter;
+	int			quarter;
+}				t_player;
+
+typedef struct s_ray {
+
 	int		map_check_y;
 	int		map_check_x;
 	long double	ray_x;
 	long double	ray_y;
 	int		ray_len;
+}				t_ray;
+
+typedef struct s_read_map
+{
+	char	backup[BUFFER_SIZE];
+	int		pos;
+	int		max;
+	int		fd;
+}			t_read_map;
+
+typedef struct	s_data {
+	
+	t_mlxinit	mlx;
+	t_minimap	map;
+	t_player	player;
+	t_ray		ray;
+	t_read_map	gnl;
+
 }				t_data;
 
 
-int	main(void);
+/*//void	*img;
+	//char	*addr;
+	//int		bits_per_pixel;
+	//int		line_length;
+	//int		endian;
+	char	**map;
+	//long double	x;
+	//long double	y;
+	//long double cell_x;
+	//long double cell_y;
+	//int			map_x;
+	//int			map_y;
+	//long double close_x_v;
+	//long double close_y_v;
+	//long double close_x_h;
+	//long double close_y_h;
+	//void	*mlx;
+	//void	*mlx_win;
+	//long double	angle;
+	//long double tmp_angle;
+	//long double	pdx;
+	//long double	pdy;
+	//int		quarter;
+	int		map_check_y;
+	int		map_check_x;
+	long double	ray_x;
+	long double	ray_y;
+	int		ray_len;*/
+
+
+int	main(int argc, char **argv);
 
 //display
 void	my_mlx_pixel_put(t_data *img, int x, int y, int color);
@@ -69,5 +135,9 @@ int	cal_xaxis(t_data *img);
 int check_map(t_data *img);
 int check_x_axis_ray_length(t_data *img);
 int forward_one_cell(t_data *img, float pdx, float pdy);
+
+//map
+char	*get_next_line(int fd, t_data *data);
+void	print_walls(t_data *data);
 
 #endif

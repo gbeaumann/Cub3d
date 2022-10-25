@@ -2,20 +2,19 @@ NAME =	cub3d
 CC =	gcc
 SRC =	main.c\
 		init.c\
-		get_map/readmap.c\
-		get_map/get_next_line_utils.c\
-		get_map/get_next_line.c\
-		move/display.c\
+		get_map_greg/get_next_line.c\
+		display/display.c\
+		display/print_map.c\
 		move/forward.c\
 		move/backward.c\
 		move/key_hook.c\
 		move/rotation.c\
 		move/player_location.c\
 		ray/sidedist_x.c\
-		ray/sidedist_y.c\
+		#ray/sidedist_y.c\
 		ray/xaxis_y.c\
 		ray/x_ray_length.c\
-		ray/check_wall.c
+		ray/check_wall.c#
 		
 FLAGS =	-Wall -Werror -Wextra -g3 -fsanitize=address -fno-omit-frame-pointer
 OBJ =	$(SRC:.c=.o)
