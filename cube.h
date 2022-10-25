@@ -38,8 +38,6 @@ typedef struct s_minimap
 	void	*sprite;
 	int		sprite_height;
 	int		sprite_width;
-	int		color;
-
 }		t_minimap;
 
 typedef struct s_read_map

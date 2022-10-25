@@ -67,8 +67,8 @@ int	main(int argc, char **argv)
 	img.img = mlx_new_image(img.mlx,  (minimap.map_width * 60), (minimap.map_height * 60));
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
 	// minimap
-	minimap.sprite_height = 60;
-	minimap.sprite_width = 60;
+	minimap.sprite_height = 15;
+	minimap.sprite_width = 15;
 	minimap.map = ft_split(map_gnl, '\n');
 	print_walls(&minimap, &img);
 

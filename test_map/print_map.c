@@ -2,7 +2,6 @@
 
 void	sprite(t_minimap *minimap, t_data *img, char type, int sprite_width, int sprite_height)
 {
-	printf("%c\n", type);
 	if (type == '1')
 		minimap->sprite = mlx_xpm_file_to_image(img->mlx,
 			"./test_map/asset/sprites/wall.xpm", &minimap->sprite_width, &minimap->sprite_height);
