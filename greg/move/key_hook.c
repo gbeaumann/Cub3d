@@ -26,6 +26,6 @@ int	player_move(int keycode, t_data *data)
 	cal_x_dist(data);
 	//cal_y_dist(data);
 	printf("\n");
-	mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win, data->mlx.img, 0, 0);
+	//mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win, data->mlx.img, 0, 0);
 	return (0);
 }
