@@ -1,34 +1,28 @@
 #ifndef		CUB3D_H
 # define	CUB3D_H
 
+# define	BUFFER_SIZE 10
+
 # include	"./minilibix/mlx.h"
 # include	"./libft/libft.h"
+//# include 	"get_next_line.h"
 # include	<stdio.h>
 # include	<stdlib.h>
 # include	<math.h>
-//open map
-# include	<fcntl.h> 
-# include	<unistd.h>
+# include	<fcntl.h>
+//# define		PI 3.141592653589793
+# define		PI 3.141593
 
-# define		PI 3.1415926535
-# define	BUFFER_SIZE 10
+typedef struct s_mlxinit {
 
-typedef struct	s_data 
-{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-	float	x;
-	float	y;
 	void	*mlx;
 	void	*mlx_win;
-	float	angle;
-	float	pdx;
-	float	pdy;
-	int		quarter;
-}				t_data;
+}					t_mlxinit;
 
 typedef struct s_minimap
 {
@@ -40,6 +34,30 @@ typedef struct s_minimap
 	int		sprite_width;
 }		t_minimap;
 
+typedef struct s_player {
+
+	long double	x;
+	long double	y;
+	long double cell_x;
+	long double cell_y;
+	int			map_x;
+	int			map_y;
+	long double	angle;
+	long double tmp_angle;
+	long double	pdx;
+	long double	pdy;
+	int			quarter;
+}				t_player;
+
+typedef struct s_ray {
+
+	int		map_check_y;
+	int		map_check_x;
+	long double	ray_x;
+	long double	ray_y;
+	int		ray_len;
+}				t_ray;
+
 typedef struct s_read_map
 {
 	char	backup[BUFFER_SIZE];
@@ -48,19 +66,78 @@ typedef struct s_read_map
 	int		fd;
 }			t_read_map;
 
+typedef struct	s_data {
+	
+	t_mlxinit	mlx;
+	t_minimap	map;
+	t_player	player;
+	t_ray		ray;
+	t_read_map	gnl;
+
+}				t_data;
+
+
+/*//void	*img;
+	//char	*addr;
+	//int		bits_per_pixel;
+	//int		line_length;
+	//int		endian;
+	char	**map;
+	//long double	x;
+	//long double	y;
+	//long double cell_x;
+	//long double cell_y;
+	//int			map_x;
+	//int			map_y;
+	//long double close_x_v;
+	//long double close_y_v;
+	//long double close_x_h;
+	//long double close_y_h;
+	//void	*mlx;
+	//void	*mlx_win;
+	//long double	angle;
+	//long double tmp_angle;
+	//long double	pdx;
+	//long double	pdy;
+	//int		quarter;
+	int		map_check_y;
+	int		map_check_x;
+	long double	ray_x;
+	long double	ray_y;
+	int		ray_len;*/
+
+
 int	main(int argc, char **argv);
+
+//display
 void	my_mlx_pixel_put(t_data *img, int x, int y, int color);
+int		display_ray(t_data *img, float pdx, float pdy);
+void	clear(t_data *img);
+int		ft_clic_close(t_data *img);
+
+char ** open_map(char *filename);
+
+//initialization
+int	init_player(t_data *img);
+
+//movements and rotations
+int	player_move(int keycode, t_data *img);
 int	rotation_left(t_data *img, float pdx, float pdy);
 int	rotation_right(t_data *img, float pdx, float pdy);
 int	forward(t_data *img, float pdx, float pdy);
-int		quarter_1(t_data *img, float pdx, float pdy);
-int		quarter_2(t_data *img, float pdx, float pdy);
-int		quarter_3(t_data *img, float pdx, float pdy);
-int		quarter_4(t_data *img, float pdx, float pdy);
-void	clear(t_data *img);
+int backward(t_data *img, float pdx, float pdy);
 
-// 2d map
-char	*get_next_line(int fd, t_minimap *minimap, t_read_map *map_gnl);
-void	print_walls(t_minimap *minimap, t_data *img);
+int check_cell(t_data *img);
+//int closest_intersection_x_y(t_data *img);
+int	cal_x_dist(t_data *img);
+int cal_y_dist(t_data *img);
+int	cal_xaxis(t_data *img);
+int check_map(t_data *img);
+int check_x_axis_ray_length(t_data *img);
+int forward_one_cell(t_data *img, float pdx, float pdy);
+
+//map
+char	*get_next_line(int fd, t_data *data);
+void	print_walls(t_data *data);
 
 #endif

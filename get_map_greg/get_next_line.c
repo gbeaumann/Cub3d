@@ -6,7 +6,7 @@
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 11:51:01 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/10/14 13:17:37 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/10/25 16:11:51 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	map_empty(void)
 	exit (0);
 }
 
-void	dimention_finder(char *map_gnl, t_minimap *minimap)
+void	dimention_finder(char *map_gnl, t_data *data)
 {
 	int	i;
 	int	width;
@@ -39,34 +39,34 @@ void	dimention_finder(char *map_gnl, t_minimap *minimap)
 		width++;
 	}
 	height++;
-	minimap->map_width = width;
-	minimap->map_height	 = height;
+	data->map.map_width = width;
+	data->map.map_height = height;
 }
 
-static int	init_read(int fd, t_read_map *gnl)
+static int	init_read(int fd, t_data *data)
 {
-	gnl->fd = fd;
-	gnl->pos = 0;
-	gnl->max = read(fd, gnl->backup, BUFFER_SIZE);
-	if (gnl->max <= 0)
+	data->gnl.fd = fd;
+	data->gnl.pos = 0;
+	data->gnl.max = read(fd, data->gnl.backup, BUFFER_SIZE);
+	if (data->gnl.max <= 0)
 		return (0);
 	else
 		return (1);
 }
 
-static char	check_read(t_read_map *gnl)
+static char	check_read(t_data *data)
 {
 	char	resultat;
 
-	if (gnl->pos >= gnl->max)
+	if (data->gnl.pos >= data->gnl.max)
 	{
-		gnl->pos = 0;
-		gnl->max = read(gnl->fd, gnl->backup, BUFFER_SIZE);
-		if (gnl->max <= 0)
+		data->gnl.pos = 0;
+		data->gnl.max = read(data->gnl.fd, data->gnl.backup, BUFFER_SIZE);
+		if (data->gnl.max <= 0)
 			return (0);
 	}
-	resultat = gnl->backup[gnl->pos];
-	gnl->pos++;
+	resultat = data->gnl.backup[data->gnl.pos];
+	data->gnl.pos++;
 	return (resultat);
 }
 
@@ -105,7 +105,7 @@ static char	*ft_join(char *str, char ch)
 	return (new_str);
 }
 
-char	*get_next_line(int fd, t_minimap *minimap, t_read_map *gnl)
+char	*get_next_line(int fd, t_data *data)
 {
 	char	ch;
 	char	*str;
@@ -115,19 +115,19 @@ char	*get_next_line(int fd, t_minimap *minimap, t_read_map *gnl)
 	index = 0;
 	height = 0;
 	str = NULL;
-	if (gnl->fd != fd)
+	if (data->gnl.fd != fd)
 	{
-		if (!init_read(fd, gnl))
+		if (!init_read(fd, data))
 			map_empty();
 	}
-	ch = check_read(gnl);
+	ch = check_read(data);
 	while (ch)
 	{
 		if (ch == '\n')
 			height++;
 		str = ft_join(str, ch);
-		ch = check_read(gnl);
+		ch = check_read(data);
 	}
-	dimention_finder(str, minimap);
+	dimention_finder(str, data);
 	return (str);
 }
