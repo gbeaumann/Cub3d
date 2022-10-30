@@ -1,6 +1,6 @@
 #include	"../cube.h"
 
-int forward_one(t_data *data, float pdx, float pdy)
+int forward_one(t_data *data)
 {
     float new_angle;
     int   len;
@@ -11,7 +11,6 @@ int forward_one(t_data *data, float pdx, float pdy)
         data->player.x += 5 * (tan(data->player.angle));
         data->player.cell_y -= 5;
         data->player.cell_x += 5 * (tan(data->player.angle));
-        display_ray(data, pdx, pdy);
     }
     else if (data->player.angle > PI/4)
     {
@@ -20,131 +19,116 @@ int forward_one(t_data *data, float pdx, float pdy)
         data->player.cell_x += 5;
         data->player.y -= 5 * (tan(new_angle));
         data->player.cell_y -= 5 * (tan(new_angle));
-        display_ray(data, pdx, pdy);
     }
     else if (data->player.angle == PI/4)
     {
+        data->player.cell_x += 5;
+        data->player.cell_y -= 5;
         data->player.x += 5;
         data->player.y -= 5;
-        display_ray(data, pdx, pdy);
     }
     return (0);
 }
 
-int forward_two(t_data *data, float pdx, float pdy, float tmp_angle)
+int forward_two(t_data *data)
 {
     float new_angle;
     int   len;
 
-    if (tmp_angle < PI/4)
+    if (data->player.tmp_angle < PI/4)
     {
         data->player.x += 5;
         data->player.cell_x += 5;
-        data->player.y += 5 * (tan(tmp_angle));
-        data->player.cell_y += 5 * (tan(tmp_angle));
-        display_ray(data, pdx, pdy);
+        data->player.y += 5 * (tan(data->player.tmp_angle));
+        data->player.cell_y += 5 * (tan(data->player.tmp_angle));
     }
-    else if (tmp_angle > PI/4)
+    else if (data->player.tmp_angle > PI/4)
     {
-        new_angle = PI/2 - tmp_angle;
+        new_angle = PI/2 - data->player.tmp_angle;
         data->player.y += 5;
         data->player.cell_y += 5;
         data->player.x += 5 * (tan(new_angle));
         data->player.cell_x += 5 * (tan(new_angle));
-        display_ray(data, pdx, pdy);
     }
-    else if (tmp_angle == PI/4)
+    else if (data->player.tmp_angle == PI/4)
     {
+        data->player.cell_x += 5;
+        data->player.cell_y += 5;
         data->player.x += 5;
         data->player.y += 5;
-        display_ray(data, pdx, pdy);
     }
     return (0);
 }
 
-int forward_three(t_data *data, float pdx, float pdy, float tmp_angle)
+int forward_three(t_data *data)
 {
     float new_angle;
     int   len;
 
-    if (tmp_angle < PI/4)
+    if (data->player.tmp_angle < PI/4)
     {
         data->player.y += 5;
         data->player.cell_y += 5;
-        data->player.x -= 5 * (tan(tmp_angle));
-        data->player.cell_x -= 5 * (tan(tmp_angle));
-        display_ray(data, pdx, pdy);
+        data->player.x -= 5 * (tan(data->player.tmp_angle));
+        data->player.cell_x -= 5 * (tan(data->player.tmp_angle));
     }
-    else if (tmp_angle > PI/4)
+    else if (data->player.tmp_angle > PI/4)
     {
-        new_angle = PI/2 - tmp_angle;
+        new_angle = PI/2 - data->player.tmp_angle;
         data->player.x -= 5;
         data->player.cell_x -= 5;
         data->player.y += 5 * (tan(new_angle));
         data->player.cell_y += 5 * (tan(new_angle));
-        display_ray(data, pdx, pdy);
     }
-    else if (tmp_angle == PI/4)
+    else if (data->player.tmp_angle == PI/4)
     {
+        data->player.cell_x -= 5;
+        data->player.cell_y += 5;
         data->player.x -= 5;
         data->player.y += 5;
-        display_ray(data, pdx, pdy);
     }
     return (0);
 }
 
-int forward_four(t_data *data, float pdx, float pdy, float tmp_angle)
+int forward_four(t_data *data)
 {
     float new_angle;
     int   len;
 
-    if (tmp_angle < PI/4)
+    if (data->player.tmp_angle < PI/4)
     {
         data->player.x -= 5;
         data->player.cell_x -= 5;
-        data->player.y -= 5 * (tan(tmp_angle));
-        data->player.cell_y -= 5 * (tan(tmp_angle));
-        display_ray(data, pdx, pdy);
+        data->player.y -= 5 * (tan(data->player.tmp_angle));
+        data->player.cell_y -= 5 * (tan(data->player.tmp_angle));
     }
-    else if (tmp_angle > PI/4)
+    else if (data->player.tmp_angle > PI/4)
     {
-        new_angle = PI/2 - tmp_angle;
+        new_angle = PI/2 - data->player.tmp_angle;
         data->player.y -= 5;
         data->player.cell_y -= 5;
         data->player.x -= 5 * (tan(new_angle));
         data->player.cell_x -= 5 * (tan(new_angle));
-        display_ray(data, pdx, pdy);
     }
-    else if (tmp_angle == PI/4)
+    else if (data->player.tmp_angle == PI/4)
     {
+        data->player.cell_x -= 5;
+        data->player.cell_y -= 5;
         data->player.x -= 5;
         data->player.y -= 5;
-        display_ray(data, pdx, pdy);
     }
     return (0);
 }
 
-int forward(t_data *data, float pdx, float pdy)
+int forward(t_data *data)
 {
-    float   tmp_angle;
-
-    tmp_angle = 0;
     if (data->player.quarter == 1)
-        forward_one(data, pdx, pdy);
+        forward_one(data);
     if (data->player.quarter == 2)
-    {
-        tmp_angle = data->player.angle - (PI/2);
-        forward_two(data, pdx, pdy, tmp_angle);
-    }
+        forward_two(data);
     if (data->player.quarter == 3)
-    {
-        tmp_angle = data->player.angle - (PI);
-        forward_three(data, pdx, pdy, tmp_angle);
-    }
+        forward_three(data);
     if (data->player.quarter == 4)
-    {
-        tmp_angle = data->player.angle - ((3 * PI)/2);
-        forward_four(data, pdx, pdy, tmp_angle);
-    }
+        forward_four(data);
     return (0);
 }

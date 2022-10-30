@@ -3,111 +3,131 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 15:08:47 by mchalard          #+#    #+#             */
-/*   Updated: 2022/10/15 15:11:09 by mchalard         ###   ########.fr       */
+/*   Created: 2022/05/03 11:51:01 by gbeauman          #+#    #+#             */
+/*   Updated: 2022/10/25 16:11:51 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../get_next_line.h"
+#include	"../cube.h"
 
-char	*ft_join(char *res, char *buffer)
+void	map_empty(void)
 {
-	char	*tmp;
-
-	if (!res)
-		tmp = ft_strdup(buffer);
-	else
-		tmp = ft_strjoin(res, buffer);
-	free(res);
-	return (tmp);
+	printf ("Error, the map is empty\n");
+	exit (0);
 }
 
-char	*ft_newextra(char *extra)
+void	dimention_finder(char *map_gnl, t_data *data)
 {
-	char	*new;
-	int		i;
-	int		j;
+	int	i;
+	int	width;
+	int	height;
 
 	i = 0;
-	while (extra[i] && extra[i] != '\n')
-		i++;
-	if (!extra[i])
+	width = 0;
+	height = 0;
+	while (map_gnl[i])
 	{
-		free(extra);
-		return (NULL);
-	}
-	j = 0;
-	i++;
-	new = (char *) malloc((ft_strlen(extra) -i + 1) * sizeof(char));
-	while (extra[i])
-	{
-		new[j++] = extra[i++];
-	}
-	new[j] = '\0';
-	free(extra);
-	return (new);
-}
-
-char	*ft_getline(char *res)
-{
-	char	*line;
-	int		i;
-
-	i = 0;
-	if (!res[i])
-		return (NULL);
-	while (res[i] && res[i] != '\n')
-		i++;
-	line = (char *)malloc((i + 2) * sizeof(char));
-	i = 0;
-	while (res[i] && res[i] != '\n')
-	{
-		line[i] = res[i];
-		i++;
-	}
-	if (res[i] && res[i] == '\n')
-		line[i++] = '\n';
-	line[i++] = '\0';
-	return (line);
-}
-
-char	*read_file(int fd, char *res)
-{
-	char	*buffer;
-	int		a;
-
-	a = 1;
-	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	while (a > 0)
-	{
-		a = read(fd, buffer, BUFFER_SIZE);
-		if (a == -1)
+		if (map_gnl[i] == '\n')
 		{
-			free(buffer);
-			return (NULL);
+			height++;
+			i++;
+			width = 0;
 		}
-		buffer[a] = '\0';
-		res = ft_join(res, buffer);
-		if (ft_strchr(buffer, '\n'))
-			break ;
+		i++;
+		width++;
 	}
-	free(buffer);
-	return (res);
+	height++;
+	data->map.map_width = width;
+	data->map.map_height = height;
 }
 
-char	*get_next_line(int fd)
+static int	init_read(int fd, t_data *data)
 {
-	static char	*res;
-	char		*line;
+	data->gnl.fd = fd;
+	data->gnl.pos = 0;
+	data->gnl.max = read(fd, data->gnl.backup, BUFFER_SIZE);
+	if (data->gnl.max <= 0)
+		return (0);
+	else
+		return (1);
+}
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+static char	check_read(t_data *data)
+{
+	char	resultat;
+
+	if (data->gnl.pos >= data->gnl.max)
+	{
+		data->gnl.pos = 0;
+		data->gnl.max = read(data->gnl.fd, data->gnl.backup, BUFFER_SIZE);
+		if (data->gnl.max <= 0)
+			return (0);
+	}
+	resultat = data->gnl.backup[data->gnl.pos];
+	data->gnl.pos++;
+	return (resultat);
+}
+
+static int	ft_len(char *str)
+{
+	int	index;
+
+	index = 0;
+	if (!str)
+		return (0);
+	while (str[index])
+		index++;
+	return (index);
+}
+
+static char	*ft_join(char *str, char ch)
+{
+	char	*new_str;
+	int		index;
+	int		len;
+
+	index = 0;
+	len = ft_len(str);
+	new_str = malloc((len + 2) * sizeof(char));
+	if (!new_str)
 		return (NULL);
-	res = read_file(fd, res);
-	if (!res)
-		return (NULL);
-	line = ft_getline(res);
-	res = ft_newextra(res);
-	return (line);
+	while (index < len)
+	{
+		new_str[index] = str[index];
+		index++;
+	}
+	new_str[index] = ch;
+	new_str[index + 1] = '\0';
+	if (str)
+		free(str);
+	return (new_str);
+}
+
+char	*get_next_line(int fd, t_data *data)
+{
+	char	ch;
+	char	*str;
+	int		index;
+	int		height;
+
+	index = 0;
+	height = 0;
+	str = NULL;
+	if (data->gnl.fd != fd)
+	{
+		if (!init_read(fd, data))
+			map_empty();
+	}
+	ch = check_read(data);
+	while (ch)
+	{
+		if (ch == '\n')
+			height++;
+		str = ft_join(str, ch);
+		ch = check_read(data);
+	}
+	dimention_finder(str, data);
+	return (str);
 }

@@ -14,18 +14,16 @@ int	player_move(int keycode, t_data *data)
 	clear(data);
 
 	if (keycode == 123)
-		rotation_left(data, pdx, pdy);
+		rotation_left(data);
 	if (keycode == 124)
-		rotation_right(data, pdx, pdy);
+		rotation_right(data);
 	if (keycode == 13)
-		forward(data, pdx, pdy);
+		forward(data);
 	if (keycode == 1)
-		backward(data, pdx, pdy);
+		backward(data);
 	check_cell(data);
-	printf("quarter %d\n", data->player.quarter);
-	cal_x_dist(data);
+	display_ray(data, pdx, pdy);
+	//cal_x_dist(data);
 	//cal_y_dist(data);
-	printf("\n");
-	//mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win, data->mlx.img, 0, 0);
 	return (0);
 }

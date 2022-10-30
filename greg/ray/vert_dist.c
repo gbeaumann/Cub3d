@@ -32,15 +32,14 @@ int quarter_four_x_dist(t_data *data)
 
 int cal_x_dist(t_data *data)
 {
-    printf("data->cellx: %Lf\n", data->player.cell_x);
     if (data->player.quarter == 1)
-            quarter_one_x_dist(data);
+        quarter_one_x_dist(data);
     if (data->player.quarter == 2)
         quarter_two_x_dist(data);
     if (data->player.quarter == 3)
         quarter_three_x_dist(data);
     if (data->player.quarter == 4)
         quarter_four_x_dist(data);
-    //cal_xaxis(data);
+    check_vert_map(data);
     return (0);
 }
