@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 	print_walls(&data);
 	if (init_player(&data) == 1)
 		return (1);
-
+		
 	mlx_hook(data.mlx.mlx_win, 2, 0, player_move, &data);
 	mlx_hook(data.mlx.mlx_win, 17, 1L << 5, ft_clic_close, &data);
 	mlx_loop(data.mlx.mlx);
