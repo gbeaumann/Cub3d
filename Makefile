@@ -1,8 +1,11 @@
 NAME =	cub3d
 CC =	gcc
 SRC =	main.c\
-		init.c\
+		init/init.c\
+		init/init_player.c\
+		init/init_len.c\
 		get_map_greg/get_next_line.c\
+		get_map_greg/check_map_errors.c\
 		display/display.c\
 		display/print_map.c\
 		move/forward.c\
@@ -10,11 +13,13 @@ SRC =	main.c\
 		move/key_hook.c\
 		move/rotation.c\
 		move/player_location.c\
-		ray/sidedist_x.c\
-		#ray/sidedist_y.c\
-		ray/xaxis_y.c\
+		ray/ray_len.c\
+		ray/map_check_vert.c\
+		ray/map_check_hor.c\
 		ray/x_ray_length.c\
-		ray/check_wall.c#
+		ray/y_ray_length.c\
+		ray/vert_dist.c\
+		ray/hor_dist.c\
 		
 FLAGS =	-Wall -Werror -Wextra -g3 -fsanitize=address -fno-omit-frame-pointer
 OBJ =	$(SRC:.c=.o)

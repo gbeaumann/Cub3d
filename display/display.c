@@ -1,19 +1,23 @@
 #include "../cube.h"
 
-/*void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
 
 	dst = data->mlx.addr + (y * data->mlx.line_length + x * (data->mlx.bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
-}*/
+}
 
 int		display_ray(t_data *data, float pdx, float pdy)
 {
 	int len;
 
 	len = 0;
-	while (len < 20)
+    find_ray_len(data);
+	printf("data ray len: %d\n", data->ray.ray_len);
+	printf("data ray x: %Lf\n", data->ray.ray_x);
+	printf("data ray y: %Lf\n", data->ray.ray_y);
+	while (len < (data->ray.ray_len))
 	{
 		pdx = sin(data->player.angle) * len;
 		pdy = cos(data->player.angle) * len;
@@ -35,7 +39,7 @@ void	clear(t_data *data)
 	len = 0;
 	pdx = data->player.pdx;
 	pdy = data->player.pdy;
-	while (len < 20)
+	while (len < data->ray.ray_len)
 	{
 		pdx = sin(data->player.angle) * len;
 		pdy = cos(data->player.angle) * len;

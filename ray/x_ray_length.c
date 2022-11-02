@@ -1,54 +1,58 @@
 #include "../cube.h"
 
-int quarter_one_x_dist_long(t_data *img)
+int quarter_one_x_dist_long(t_data *data)
 {
-    img->ray_x = 60/sin(img->angle);
-    img->map_check_x += 1;
-    img->map_check_y -= (60/tan(img->angle))/60;
-    return (img->ray_x);
+    data->ray.ray_x += data->map.map_size/sin(data->player.angle);
+    data->ray.map_check_x += 1;
+    data->ray.tmp_y -= (data->map.map_size/tan(data->player.angle));
+    data->ray.map_check_y = data->ray.tmp_y/data->map.map_size;
+    return (data->ray.ray_x);
 }
 
-int quarter_two_x_dist_long(t_data *img)
+int quarter_two_x_dist_long(t_data *data)
 {
-    img->ray_x = 60/cos(img->tmp_angle);
-    img->map_check_x += 1;
-    img->map_check_y += (tan(img->tmp_angle));
-    return (img->ray_x);
+    data->ray.ray_x += data->map.map_size/cos(data->player.tmp_angle);
+    data->ray.map_check_x += 1;
+    data->ray.tmp_y += data->map.map_size * (tan(data->player.tmp_angle));
+    data->ray.map_check_y = data->ray.tmp_y/data->map.map_size;
+    return (data->ray.ray_x);
 }
 
-int quarter_three_x_dist_long(t_data *img)
+int quarter_three_x_dist_long(t_data *data)
 {
-    img->ray_x = 60/sin(img->tmp_angle);
-    img->map_check_x -= 1;
-    img->map_check_y += (60/tan(img->tmp_angle))/60;
-    return (img->ray_x);
+    data->ray.ray_x += data->map.map_size/sin(data->player.tmp_angle);
+    data->ray.map_check_x -= 1;
+    data->ray.tmp_y += (data->map.map_size/tan(data->player.tmp_angle));
+    data->ray.map_check_y = data->ray.tmp_y/data->map.map_size;
+    return (data->ray.ray_x);
 }
 
-int quarter_four_x_dist_long(t_data *img)
+int quarter_four_x_dist_long(t_data *data)
 {
-    img->ray_x = 60/cos(img->tmp_angle);
-    img->map_check_x -= 1;
-    img->map_check_y -= (tan(img->angle));
-    return (img->ray_x);
+    data->ray.ray_x += data->map.map_size/cos(data->player.tmp_angle);
+    data->ray.map_check_x -= 1;
+    data->ray.tmp_y -= data->map.map_size * (tan(data->player.tmp_angle));
+    data->ray.map_check_y = data->ray.tmp_y/data->map.map_size;
+    return (data->ray.ray_x);
 }
 
-int check_x_axis_ray_length(t_data *img)
+int x_ray_len_check(t_data *data)
 {
     while (1)
     {
-        if (check_map(img))
+        /*printf("x ray: %Lf\n", data->ray.ray_x);
+        printf("map x to check vert: %d\n", data->ray.map_check_x);
+        printf("map y to check vert: %d\n", data->ray.map_check_y);*/
+        if (check_map(data))
             break;
-        if (img->quarter == 1)
-            quarter_one_x_dist_long(img);
-        if (img->quarter == 2)
-            quarter_two_x_dist_long(img);
-        if (img->quarter == 3)
-            quarter_three_x_dist_long(img);
-        if (img->quarter == 4)
-            quarter_four_x_dist_long(img);
+        if (data->player.quarter == 1)
+            quarter_one_x_dist_long(data);
+        if (data->player.quarter == 2)
+            quarter_two_x_dist_long(data);
+        if (data->player.quarter == 3)
+            quarter_three_x_dist_long(data);
+        if (data->player.quarter == 4)
+            quarter_four_x_dist_long(data);
     }
-    printf("img->ray_x %Lf\n", img->ray_x);
-    printf("x coordinate of the cell to check: %d\n", img->map_check_x);
-    printf("y coordinate of the cell to check: %d\n", img->map_check_y);
     return (0);
 }
