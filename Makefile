@@ -2,8 +2,10 @@ NAME =	cub3d
 CC =	gcc
 SRC =	main.c\
 		init/init.c\
-		init/init_player.c\
 		init/init_len.c\
+		init/init_map.c\
+		init/init_pos.c\
+		init/init_rays.c\
 		get_map_greg/get_next_line.c\
 		get_map_greg/check_map_errors.c\
 		display/display.c\

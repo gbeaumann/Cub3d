@@ -13,20 +13,27 @@ int		display_ray(t_data *data, float pdx, float pdy)
 	int len;
 
 	len = 0;
-    find_ray_len(data);
-	printf("data ray len: %d\n", data->ray.ray_len);
-	printf("data ray x: %Lf\n", data->ray.ray_x);
-	printf("data ray y: %Lf\n", data->ray.ray_y);
-	while (len < (data->ray.ray_len))
+	data->n = 0;
+	mlx_destroy_image(data->mlx.mlx, data->mlx.img);
+	data->mlx.img = mlx_new_image(data->mlx.mlx, data->map.game_display_x, data->map.game_display_y);
+	data->mlx.addr = mlx_get_data_addr(data->mlx.img, &data->mlx.bits_per_pixel, &data->mlx.line_length, &data->mlx.endian);
+	while (data->n < data->max)
 	{
-		pdx = sin(data->player.angle) * len;
-		pdy = cos(data->player.angle) * len;
-		//my_mlx_pixel_put(data, data->player.x + pdx, data->player.y - pdy, 0x00FF0000);
-		mlx_pixel_put(data->mlx.mlx, data->mlx.mlx_win, data->player.x + pdx, data->player.y - pdy, 0x00FF0000);
-		len++;
+		len = 0;
+		find_ray_len(data);
+		print_game(data);
+		while (len < data->ray[data->n].ray_len)
+		{
+			pdx = sin(data->ray[data->n].angle) * len;
+			pdy = cos(data->ray[data->n].angle) * len;
+			//mlx_pixel_put(data->mlx.mlx, data->mlx.mlx_win, data->player.x + pdx, data->player.y - pdy, 0x00FF0000);
+			len++;
+		}
+		data->ray[data->n].pdx = pdx;
+		data->ray[data->n].pdy = pdy;
+		data->n++;
 	}
-	data->player.pdx = pdx;
-	data->player.pdy = pdy;
+	mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win, data->mlx.img, data->map.game_display_start, 0);
 	return (0);
 }
 
@@ -37,15 +44,19 @@ void	clear(t_data *data)
 	float	pdy;
 
 	len = 0;
-	pdx = data->player.pdx;
-	pdy = data->player.pdy;
-	while (len < data->ray.ray_len)
+	data->n = 0;
+	while (data->n < data->max)
 	{
-		pdx = sin(data->player.angle) * len;
-		pdy = cos(data->player.angle) * len;
-		//my_mlx_pixel_put(data, data->player.x + pdx, data->player.y - pdy, 0);
-		mlx_pixel_put(data->mlx.mlx, data->mlx.mlx_win, data->player.x + pdx, data->player.y - pdy, 0);
-		len++;
+		len = 0;
+		pdx = data->ray[data->n].pdx;
+		pdy = data->ray[data->n].pdy;
+		while (len < data->ray[data->n].ray_len)
+		{
+			pdx = sin(data->ray[data->n].angle) * len;
+			pdy = cos(data->ray[data->n].angle) * len;
+			mlx_pixel_put(data->mlx.mlx, data->mlx.mlx_win, data->player.x + pdx, data->player.y - pdy, 0);
+			len++;
+		}
+		data->n++;
 	}
-	//mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win, data->mlx.img, 0, 0);
 }

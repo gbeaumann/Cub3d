@@ -7,6 +7,10 @@ int	main(int argc, char **argv)
 	int		fd;
 	char	*map_gnl;
 
+	data.map.small_map = 1;
+	data.map.move_size = 10;
+	data.map.map_size = 60;
+
 	// init map
 	fd = open(argv[1], O_RDONLY);
 	map_gnl = get_next_line(fd, &data);
@@ -19,7 +23,7 @@ int	main(int argc, char **argv)
 	data.mlx.img = mlx_new_image(data.mlx.mlx, data.map.game_display_x, data.map.game_display_y);
 	data.mlx.addr = mlx_get_data_addr(data.mlx.img, &data.mlx.bits_per_pixel, &data.mlx.line_length, &data.mlx.endian);
 	//print_walls(&data);
-	print_mini_walls(&data);
+	//print_mini_walls(&data);
 	init_player(&data);
 	//print_game(&data);
 

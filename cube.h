@@ -46,31 +46,33 @@ typedef struct s_minimap
 
 typedef struct s_player {
 
-    long double    x;
-    long double    y;
-    long double cell_x;
-    long double cell_y;
-    int            map_x;
-    int            map_y;
-    long double    angle;
-    int            rot;
-    long double tmp_angle;
-    long double    pdx;
-    long double    pdy;
-    int            quarter;
-}                t_player;
+	long double	x;
+	long double	y;
+	long double cell_x;
+	long double cell_y;
+	int			map_x;
+	int			map_y;
+}				t_player;
 
 typedef struct s_ray {
 
-    int        map_check_y;
-    int        map_check_x;
-    long double    ray_x;
-    long double    ray_y;
-    long double tmp_x;
-    long double tmp_y;
-    int        ray_len;
-    char    wall;
-}                t_ray;
+	int		map_check_y;
+	int		map_check_x;
+	long double	ray_x;
+	long double	ray_y;
+	long double tmp_x;
+	long double tmp_y;
+	int		ray_len;
+	long double angle;
+	long double tmp_angle;
+	long double init_tmp_angle;
+	long double pdx;
+	long double pdy;
+	int  quarter;
+	int	rot;
+	//int	init_rot;
+	char	wall;
+}				t_ray;
 
 typedef struct s_read_map
 {
@@ -85,41 +87,13 @@ typedef struct	s_data {
 	t_mlxinit	mlx;
 	t_minimap	map;
 	t_player	player;
-	t_ray		ray;
+	//t_ray		ray;
 	t_read_map	gnl;
+	t_ray		ray[111];
+	int			n;
+	int			max;
 
 }				t_data;
-
-
-/*//void	*data;
-	//char	*addr;
-	//int		bits_per_pixel;
-	//int		line_length;
-	//int		endian;
-	char	**map;
-	//long double	x;
-	//long double	y;
-	//long double cell_x;
-	//long double cell_y;
-	//int			map_x;
-	//int			map_y;
-	//long double close_x_v;
-	//long double close_y_v;
-	//long double close_x_h;
-	//long double close_y_h;
-	//void	*mlx;
-	//void	*mlx_win;
-	//long double	angle;
-	//long double tmp_angle;
-	//long double	pdx;
-	//long double	pdy;
-	//int		quarter;
-	int		map_check_y;
-	int		map_check_x;
-	long double	ray_x;
-	long double	ray_y;
-	int		ray_len;*/
-
 
 int	main(int argc, char **argv);
 
@@ -135,9 +109,11 @@ void	print_game(t_data *data);
 char ** open_map(char *filename);
 
 //initialization
-int	init_player(t_data *data);
-int find_pos(t_data *data);
-int exception_len(t_data *data);
+int		init_player(t_data *img);
+int		find_pos(t_data *data);
+void	init_map(t_data *data);
+int		exception_len(t_data *data);
+void    init_rays(t_data *data);
 
 //movements and rotations
 int	player_move(int keycode, t_data *data);
@@ -147,7 +123,6 @@ int	forward(t_data *data);
 int backward(t_data *data);
 
 int check_cell(t_data *data);
-//int closest_intersection_x_y(t_data *data);
 int    cal_x_dist(t_data *data);
 int cal_y_dist(t_data *data);
 int check_vert_map(t_data *data);
@@ -157,6 +132,8 @@ int x_ray_len_check(t_data *data);
 int y_ray_len_check(t_data *data);
 int forward_one_cell(t_data *data, float pdx, float pdy);
 int find_ray_len(t_data *data);
+
+int	quarter_calculation(t_data *data);
 
 //map
 char	*get_next_line(int fd, t_data *data);

@@ -10,7 +10,9 @@ int	player_move(int keycode, t_data *data)
 {
 	float	pdx;
 	float	pdy;
-	
+
+	pdx = 0;
+	pdy = 0;
 	clear(data);
 
 	if (keycode == 123)
@@ -23,8 +25,5 @@ int	player_move(int keycode, t_data *data)
 		backward(data);
 	check_cell(data);
 	display_ray(data, pdx, pdy);
-	//cal_x_dist(data);
-	//cal_y_dist(data);
-	print_game(data);
 	return (0);
 }
