@@ -21,15 +21,17 @@ int	init_player(t_data *data)
 	//data->player.pdy = 0;
 
 	//initialization of rays
-	data->max = 111;
+	data->max = 51;
 	init_rays(data);
+	set_sprite(data);
 
 	int pdx;
 	int pdy;
 
 	pdx = 0;
 	pdy = 0;
-	display_ray(data, pdx, pdy);
-	print_game(data);
+	//display_ray(data, pdx, pdy);
+	//print_game(data);
+	display_game(data);
 	return (0);
 }

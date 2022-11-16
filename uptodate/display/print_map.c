@@ -80,6 +80,22 @@ void	print_mini_walls(t_data *data)
 	}
 }
 
+int	find_wall_ray(t_data *data)
+{
+	unsigned int color;
+
+
+	if (data->ray[data->n].wall == 'N')
+		color = 0x00FF0000;
+	else if (data->ray[data->n].wall == 'S')
+		color = get_north_wall_pixel(data);
+	else if (data->ray[data->n].wall == 'E')
+		color = 0x00FF00F0;
+	else if (data->ray[data->n].wall == 'W')
+		color = 0x00FFFFFF;
+	return (color);
+}
+
 void	print_game(t_data *data)
 {
 	int	wall_height;
@@ -88,7 +104,14 @@ void	print_game(t_data *data)
 	int y;
 	int y2;
 	int x;
+	int	ray;
+	int	dif;
+	unsigned int color;
+	int	prox;
+	int	ny;
+	int	proy;
 
+	ray = fix_fish_eye(data);
 	len = 0;
 	ray_w = 0;
 	y = data->map.game_display_y / 2;
@@ -98,24 +121,26 @@ void	print_game(t_data *data)
 		x += data->n * 10;
 	else
 		x -= (data->n - (data->max/2)) * 10;
-	printf("ray len: %d\n", data->ray[data->n].ray_len);
-	wall_height = (data->ray[data->n].ray_len / (pow(data->ray[data->n].ray_len, 2))) * 20000;
-	printf("wall: %d\n", wall_height);
-	//mlx_destroy_image(data->mlx.mlx, data->mlx.img);
-	//data->mlx.img = mlx_new_image(data->mlx.mlx, data->map.game_display_x, data->map.game_display_y);
-	//data->mlx.addr = mlx_get_data_addr(data->mlx.img, &data->mlx.bits_per_pixel, &data->mlx.line_length, &data->mlx.endian);
-	//printf ("x: %d\n", x);
+	wall_height = (ray / (pow(ray, 2))) * 20000;
+	color = find_wall_ray(data);
+	//printf("wall height ray[%d]: %d\n", data->n, wall_height);
+	proy = rule_of_three_y(wall_height);
 	while (ray_w < 10)
 	{
-		wall_height = ((data->ray[data->n].ray_len - (0.01 * ray_w)) / (pow(data->ray[data->n].ray_len, 2))) * 20000;
-	//	printf ("x + ray: %d\n", x + ray_w);
+		ny = 0;
 		while (len < wall_height && len < 500)
 		{
-			my_mlx_pixel_put(data, x + ray_w, y, 0x00FF0000);
-			my_mlx_pixel_put(data, x + ray_w, y2, 0x00FF0000);
+			if (ny == proy)
+			{
+				color = find_wall_ray(data);
+				ny = 0;
+			}
+			my_mlx_pixel_put(data, x + ray_w, y, color);
+			my_mlx_pixel_put(data, x + ray_w, y2, color);
 			y--;
 			y2++;
 			len++;
+			ny++;
 		}
 		len = 0;
 		y = data->map.game_display_y / 2;

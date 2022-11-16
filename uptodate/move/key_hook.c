@@ -28,6 +28,7 @@ int	player_move(int keycode, t_data *data)
 	if (keycode == 0)
 		left(data);
 	check_cell(data);
-	display_ray(data, pdx, pdy);
+	display_game(data);
+	//display_ray(data, pdx, pdy);
 	return (0);
 }

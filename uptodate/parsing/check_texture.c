@@ -10,11 +10,11 @@ int check_text_north(t_data *data, char *param)
         path = ft_cpy_index(param, 2);
     else if (param[0] == 'N')
         path = ft_cpy_index(param, 1);
-    //if (check_path(path) || countn > 1)
-    //{
-        //printf("Error: invalid path for north wall texture\n");
-            //return (1);
-    //}
+    if (check_path(path) || countn > 1)
+    {
+        printf("Error: invalid path for north wall texture\n");
+            return (1);
+    }
     data->param.npath = path;
     printf("npath: %s\n", data->param.npath);
     return (0);
@@ -30,11 +30,11 @@ int check_text_south(t_data *data, char *param)
         path = ft_cpy_index(param, 2);
     else if (param[0] == 'S')
         path = ft_cpy_index(param, 1);
-    //if (check_path(path) || counts > 1)
-    //{
-        //printf("Error: invalid path for south wall texture\n");
-            //return (1);
-    //}
+    if (check_path(path) || counts > 1)
+    {
+        printf("Error: invalid path for south wall texture\n");
+            return (1);
+    }
     data->param.spath = path;
     printf("spath: %s\n", data->param.spath);
     return (0);
@@ -50,11 +50,11 @@ int check_text_east(t_data *data, char *param)
         path = ft_cpy_index(param, 2);
     else if (param[0] == 'E')
         path = ft_cpy_index(param, 1);
-    //if (check_path(path) || counte > 1)
-    //{
-        //printf("Error: invalid path for east wall texture\n");
-            //return (1);
-    //}
+    if (check_path(path) || counte > 1)
+    {
+        printf("Error: invalid path for east wall texture\n");
+            return (1);
+    }
     data->param.epath = path;
     printf("epath: %s\n", data->param.epath);
     return (0);
@@ -70,11 +70,11 @@ int check_text_west(t_data *data, char *param)
         path = ft_cpy_index(param, 2);
     else if (param[0] == 'W')
         path = ft_cpy_index(param, 1);
-    //if (check_path(path) || countw > 1)
-    //{
-        //printf("Error: invalid path for west wall texture\n");
-            //return (1);
-    //}
+    if (check_path(path) || countw > 1)
+    {
+        printf("Error: invalid path for west wall texture\n");
+            return (1);
+    }
     data->param.wpath = path;
     printf("wpath: %s\n", data->param.wpath);
     return (0);

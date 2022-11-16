@@ -55,6 +55,7 @@ int	main(int argc, char **argv)
 	//print_walls(&data);
 	//print_mini_walls(&data);
 	init_player(&data);
+	//test_pixel(&data);
 	//print_game(&data);
 
 	mlx_hook(data.mlx.mlx_win, 2, 0, player_move, &data);

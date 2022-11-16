@@ -26,6 +26,15 @@ typedef struct s_settings {
 
 }				t_settings;
 
+typedef struct s_sprite
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}					t_sprite;
+
 typedef struct s_mlxinit {
 
 	void	*img;
@@ -75,11 +84,14 @@ typedef struct s_ray {
 
 	int		map_check_y;
 	int		map_check_x;
+	int		map_x;
+	int		map_y;
 	long double	ray_x;
 	long double	ray_y;
 	long double tmp_x;
 	long double tmp_y;
 	int		ray_len;
+	//long double ray;
 	long double angle;
 	long double tmp_angle;
 	long double init_tmp_angle;
@@ -105,10 +117,10 @@ typedef struct	s_data {
 	t_minimap	map;
 	t_player	player;
 	t_read_map	gnl;
-	t_ray		ray[111];
+	t_ray		ray[51];
+	t_sprite	sprites[4];
 	int			n;
 	int			max;
-
 }				t_data;
 
 int	main(int argc, char **argv);
@@ -118,9 +130,17 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int		display_ray(t_data *data, float pdx, float pdy);
 void	clear(t_data *data);
 int		ft_clic_close(t_data *data);
+int fix_smooth(t_data *data, int ray);
 
 //display game
 void	print_game(t_data *data);
+int fix_fish_eye(t_data *data);
+int correct_perspective(t_data *data);
+int test_pixel(t_data *data);
+unsigned int    get_north_wall_pixel(t_data *data);
+int	display_game(t_data *data);
+int set_sprite(t_data *data);
+int rule_of_three_y(int wall_heigth);
 
 char ** open_map(char *filename);
 

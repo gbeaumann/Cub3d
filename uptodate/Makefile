@@ -17,6 +17,7 @@ SRC =	main.c\
 		get_map_greg/check_map_errors.c\
 		display/display.c\
 		display/print_map.c\
+		display/resize.c\
 		move/forward.c\
 		move/backward.c\
 		move/right.c\
@@ -36,6 +37,8 @@ SRC =	main.c\
 		ray/y_ray_length.c\
 		ray/vert_dist.c\
 		ray/hor_dist.c\
+		ray/fix_fisheye.c\
+		test_pixel.c\
 		
 FLAGS =	-Wall -Werror -Wextra -g3 -fsanitize=address -fno-omit-frame-pointer
 OBJ =	$(SRC:.c=.o)
