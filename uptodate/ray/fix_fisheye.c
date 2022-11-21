@@ -1,21 +1,13 @@
 #include "../cube.h"
 
-int fix_fish_eye(t_data *data)
+long double fix_fish_eye(t_data *data)
 {
     long double angle;
     long double         ray;
 
-    if (data->n <= data->max/2)
-    {
-        angle = data->n * ((PI/8) /(data->max/2));
-        ray = data->ray[data->n].ray_len * cos(angle);
-    }
-    else if (data->n > data->max/2)
-    {
-        angle = ((data->n - data->max/2) * ((PI/8) /(data->max/2)));
-        ray = data->ray[data->n].ray_len * cos(angle);
-    }
-    printf("ray[%d]: %Lf\n", data->n, ray);
+    angle = ((data->n - data->max/2) * ((PI/8) /(data->max/2)));
+    ray = data->ray[data->n].ray_len * cos(angle);
+    //printf("ray[%d]: %Lf\n", data->n, ray);
     return (ray);
 }
 

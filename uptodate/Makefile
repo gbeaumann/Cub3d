@@ -5,7 +5,7 @@ SRC =	main.c\
 		init/init_len.c\
 		init/init_map.c\
 		init/init_pos.c\
-		init/init_rays.c\
+		init/new_init_rays.c\
 		parsing/check_setting.c\
 		parsing/init_color.c\
 		parsing/parse_space.c\
@@ -18,6 +18,7 @@ SRC =	main.c\
 		display/display.c\
 		display/print_map.c\
 		display/resize.c\
+		display/get_color.c\
 		move/forward.c\
 		move/backward.c\
 		move/right.c\

@@ -90,7 +90,7 @@ typedef struct s_ray {
 	long double	ray_y;
 	long double tmp_x;
 	long double tmp_y;
-	int		ray_len;
+	long double	ray_len;
 	//long double ray;
 	long double angle;
 	long double tmp_angle;
@@ -117,10 +117,11 @@ typedef struct	s_data {
 	t_minimap	map;
 	t_player	player;
 	t_read_map	gnl;
-	t_ray		ray[51];
+	t_ray		ray[91];
 	t_sprite	sprites[4];
 	int			n;
 	int			max;
+	int			ray1;
 }				t_data;
 
 int	main(int argc, char **argv);
@@ -134,13 +135,20 @@ int fix_smooth(t_data *data, int ray);
 
 //display game
 void	print_game(t_data *data);
-int fix_fish_eye(t_data *data);
+long double fix_fish_eye(t_data *data);
 int correct_perspective(t_data *data);
 int test_pixel(t_data *data);
-unsigned int    get_north_wall_pixel(t_data *data);
+//unsigned int    get_north_wall_pixel(t_data *data, int x);
 int	display_game(t_data *data);
 int set_sprite(t_data *data);
-int rule_of_three_y(int wall_heigth);
+float rule_of_three_x(t_data *data);
+float rule_of_three_y(long double wall_heigth);
+unsigned int get_color_tex(t_data *data, int x, int y);
+
+//get color
+unsigned int get_color_y2(t_data *data, float proy, int trigger, int x);
+unsigned int get_color_y1(t_data *data, float proy, int trigger, int x);
+int get_xval_sprite(t_data *data);
 
 char ** open_map(char *filename);
 

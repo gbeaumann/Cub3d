@@ -9,6 +9,11 @@ int	get_settings(char *file, t_data *data)
 
 	// init map
 	fd = open(file, O_RDONLY);
+	if (fd == -1)
+	{
+		printf("error while opening file\n");
+		return (0);
+	}
 	map_gnl = get_next_line(fd, data);
 	mp_check = ft_split_file(map_gnl, '\n');
 	if (get_map(mp_check, data))

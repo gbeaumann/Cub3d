@@ -80,15 +80,31 @@ void	print_mini_walls(t_data *data)
 	}
 }
 
-int	find_wall_ray(t_data *data)
+int	find_wall_ray_y1(t_data *data, int x, float proy, int trigger)
 {
 	unsigned int color;
-
 
 	if (data->ray[data->n].wall == 'N')
 		color = 0x00FF0000;
 	else if (data->ray[data->n].wall == 'S')
-		color = get_north_wall_pixel(data);
+		//color = 0xFFFF00;
+		color = get_color_y1(data, proy, trigger, x);
+	else if (data->ray[data->n].wall == 'E')
+		color = 0x00FF00F0;
+	else if (data->ray[data->n].wall == 'W')
+		color = 0x00FFFFFF;
+	return (color);
+}
+
+int	find_wall_ray_y2(t_data *data, int x, float proy, int trigger)
+{
+	unsigned int color;
+
+	if (data->ray[data->n].wall == 'N')
+		color = 0x00FF0000;
+	else if (data->ray[data->n].wall == 'S')
+		//color = 0xFFFF00;
+		color = get_color_y2(data, proy, trigger, x);
 	else if (data->ray[data->n].wall == 'E')
 		color = 0x00FF00F0;
 	else if (data->ray[data->n].wall == 'W')
@@ -98,49 +114,47 @@ int	find_wall_ray(t_data *data)
 
 void	print_game(t_data *data)
 {
-	int	wall_height;
+	long double	wall_height;
 	int len;
 	int	ray_w;
 	int y;
 	int y2;
 	int x;
-	int	ray;
+	long double	ray;
 	int	dif;
-	unsigned int color;
-	int	prox;
-	int	ny;
-	int	proy;
+	static int  xn = 0;
+	float		proy;
+	static int xpix = 0;
 
+	unsigned int	color_y1;
+	unsigned int	color_y2;
+
+
+	y2 = 0;
 	ray = fix_fish_eye(data);
 	len = 0;
 	ray_w = 0;
 	y = data->map.game_display_y / 2;
 	y2 = data->map.game_display_y / 2;
-	x = data->map.game_display_x / 2;
-	if (data->n <= data->max/2)
-		x += data->n * 10;
-	else
-		x -= (data->n - (data->max/2)) * 10;
+	x = 10 * data->n;
 	wall_height = (ray / (pow(ray, 2))) * 20000;
-	color = find_wall_ray(data);
-	//printf("wall height ray[%d]: %d\n", data->n, wall_height);
 	proy = rule_of_three_y(wall_height);
+	if (data->ray[data->n].wall == 'S')
+		printf("proy[%d]: %f\n", data->n, proy);
 	while (ray_w < 10)
 	{
-		ny = 0;
+		xpix = get_xval_sprite(data);
+		color_y1 = find_wall_ray_y1(data, x, proy, 1);
+		color_y2 = find_wall_ray_y2(data, x, proy, 1);
 		while (len < wall_height && len < 500)
 		{
-			if (ny == proy)
-			{
-				color = find_wall_ray(data);
-				ny = 0;
-			}
-			my_mlx_pixel_put(data, x + ray_w, y, color);
-			my_mlx_pixel_put(data, x + ray_w, y2, color);
+			my_mlx_pixel_put(data, x + ray_w, y, color_y2);
+			my_mlx_pixel_put(data, x + ray_w, y2, color_y1);
+			color_y1 = find_wall_ray_y1(data, xpix, proy, 0);
+			color_y2 = find_wall_ray_y2(data, xpix, proy, 0);
 			y--;
 			y2++;
 			len++;
-			ny++;
 		}
 		len = 0;
 		y = data->map.game_display_y / 2;

@@ -45,6 +45,8 @@ unsigned int get_color_tex(t_data *data, int x, int y)
 	int				g;
 	int				b;
 
+    //printf("...............x: %d\n", x);
+    //printf("..............y: %d\n", y);
     clr = *(unsigned int *)(data->sprites[0].addr + (y * data->sprites[0].line_length + x * (data->sprites[0].bits_per_pixel / 8)));
 	t = ((clr >> 24) & 0xFF);
 	r = ((clr >> 16) & 0xFF);
@@ -55,50 +57,15 @@ unsigned int get_color_tex(t_data *data, int x, int y)
 }
 
 
-
-unsigned int    get_north_wall_pixel(t_data *data)
+//old version
+unsigned int    get_north_wall_pixel(t_data *data, int x)
 {
-    static int x = 0;
+    //static int x = 0;
     static int y = 0;
     unsigned int color;
-    static  int old_n = 0;
-
-    if (data->n <= data->max/2 && x < 52)
-    {
-        if (x == 0)
-            x = 26;
-        if (data->n != old_n)
-        {
-            y = 0;
-            x++;
-        }
-        printf("ray[%d]: n <= half x:========= %d\n", data->n, x);
-        if (y < 52)
-        {
-            color = get_color_tex(data, x, y);
-            y++;
-        }
-        old_n = data->n;
-        //x++;
-    }
-    else if (data->n > data->max/2 && x > 0)
-    {
-        if (x >= 27)
-            x = 27;
-        if (data->n != old_n)
-        {
-            y = 0;
-            x--;
-        }
-        printf("ray[%d]: n > half x:========= %d\n", data->n, x);
-        while (y < 52)
-        {
-            color = get_color_tex(data, x, y);
-
-            y++;
-        }
-        old_n = data->n;
-    }
+   
+    y++;
+    color = get_color_tex(data, x, y); 
     return (color);
 }
 
