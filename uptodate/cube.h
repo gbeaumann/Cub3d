@@ -56,15 +56,12 @@ typedef struct s_minimap
 	int		sprite_width;
 	int		map_w;
 	int		map_h;
-	// print small or regular map
 	int		small_map;
 	int		map_size;
 	int		move_size;
-	// game display
 	int		game_display_x;
 	int		game_display_y;
 	int		game_display_start;
-	//sizes
 	int		tab_size;
 	int		line_size;
 	int		max;
@@ -84,8 +81,8 @@ typedef struct s_ray {
 
 	int		map_check_y;
 	int		map_check_x;
-	int		map_x;
-	int		map_y;
+	//int		map_x;
+	//int		map_y;
 	long double	ray_x;
 	long double	ray_y;
 	long double tmp_x;
@@ -100,6 +97,8 @@ typedef struct s_ray {
 	int  quarter;
 	int	rot;
 	char	wall;
+	float		imgx;
+	float		imgy;
 }				t_ray;
 
 typedef struct s_read_map
@@ -117,11 +116,12 @@ typedef struct	s_data {
 	t_minimap	map;
 	t_player	player;
 	t_read_map	gnl;
-	t_ray		ray[91];
+	t_ray		ray[131];
 	t_sprite	sprites[4];
 	int			n;
 	int			max;
 	int			ray1;
+	int			xstart;
 }				t_data;
 
 int	main(int argc, char **argv);
@@ -132,28 +132,29 @@ int		display_ray(t_data *data, float pdx, float pdy);
 void	clear(t_data *data);
 int		ft_clic_close(t_data *data);
 int fix_smooth(t_data *data, int ray);
+float find_prox(t_data *data);
+int find_x_pix(t_data * data);
 
 //display game
 void	print_game(t_data *data);
 long double fix_fish_eye(t_data *data);
 int correct_perspective(t_data *data);
 int test_pixel(t_data *data);
-//unsigned int    get_north_wall_pixel(t_data *data, int x);
 int	display_game(t_data *data);
 int set_sprite(t_data *data);
 float rule_of_three_x(t_data *data);
 float rule_of_three_y(long double wall_heigth);
-unsigned int get_color_tex(t_data *data, int x, int y);
+unsigned int get_color_tex(t_data *data, int x, int y, int s);
 
 //get color
-unsigned int get_color_y2(t_data *data, float proy, int trigger, int x);
-unsigned int get_color_y1(t_data *data, float proy, int trigger, int x);
+unsigned int get_color_y2(t_data *data, float proy, int trigger, int x, int s);
+unsigned int get_color_y1(t_data *data, float proy, int trigger, int x, int s);
 int get_xval_sprite(t_data *data);
 
 char ** open_map(char *filename);
 
 //initialization
-int		init_player(t_data *img);
+int		init(t_data *img);
 int		find_pos(t_data *data);
 void	init_map(t_data *data);
 int		exception_len(t_data *data);

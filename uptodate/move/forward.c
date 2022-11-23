@@ -3,7 +3,6 @@
 int forward_one(t_data *data)
 {
     float new_angle;
-    int   len;
 
     if (data->ray[data->ray1].angle < PI/4)
     {
@@ -33,7 +32,6 @@ int forward_one(t_data *data)
 int forward_two(t_data *data)
 {
     float new_angle;
-    int   len;
 
     if (data->ray[data->ray1].tmp_angle < PI/4)
     {
@@ -63,7 +61,6 @@ int forward_two(t_data *data)
 int forward_three(t_data *data)
 {
     float new_angle;
-    int   len;
 
     if (data->ray[data->ray1].tmp_angle < PI/4)
     {
@@ -93,7 +90,6 @@ int forward_three(t_data *data)
 int forward_four(t_data *data)
 {
     float new_angle;
-    int   len;
 
     if (data->ray[data->ray1].tmp_angle < PI/4)
     {

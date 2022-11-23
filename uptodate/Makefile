@@ -40,6 +40,7 @@ SRC =	main.c\
 		ray/hor_dist.c\
 		ray/fix_fisheye.c\
 		test_pixel.c\
+		display/test_pix_x.c\
 		
 FLAGS =	-Wall -Werror -Wextra -g3 -fsanitize=address -fno-omit-frame-pointer
 OBJ =	$(SRC:.c=.o)

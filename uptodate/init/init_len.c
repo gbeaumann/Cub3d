@@ -9,6 +9,7 @@ int find_south_wall(t_data *data)
         y--;
     data->ray[data->n].ray_len = ((data->player.map_y - 1 - y) * data->map.map_size) + data->player.cell_y;
     data->ray[data->n].wall = 'S';
+    data->ray[data->n].imgx = data->player.cell_x;
     return (0);
 }
 
@@ -21,6 +22,7 @@ int find_west_wall(t_data *data)
         x++;
     data->ray[data->n].ray_len = ((x - data->player.map_x - 1) * data->map.map_size) + (data->map.map_size - data->player.cell_x);
     data->ray[data->n].wall = 'W';
+    data->ray[data->n].imgy = data->player.cell_y;
     return (0);
 }
 
@@ -33,6 +35,7 @@ int find_north_wall(t_data *data)
         y++;
     data->ray[data->n].ray_len = ((y - data->player.map_y - 1) * data->map.map_size) + (data->map.map_size - data->player.cell_y);
     data->ray[data->n].wall = 'N';
+    data->ray[data->n].imgx = data->player.cell_x;
     return (0);
 }
 
@@ -45,6 +48,7 @@ int find_east_wall(t_data *data)
         x--;
     data->ray[data->n].ray_len = ((data->player.map_x - 1 - x) * data->map.map_size) + (data->player.cell_x);
     data->ray[data->n].wall = 'E';
+    data->ray[data->n].imgy = data->player.cell_y;
     return (0);
 }
 

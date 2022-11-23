@@ -5,16 +5,6 @@ int init_angle_first_ray(char dir, t_data *data)
     static char count = 0;
 
     count++;
-    printf("okee\n");
-    data->ray[data->ray1].init_tmp_angle = 0;
-    data->ray[data->ray1].map_check_x = 0;
-    data->ray[data->ray1].map_check_y = 0;
-    data->ray[data->ray1].ray_len = 0;
-    data->ray[data->ray1].ray_x = 0;
-    data->ray[data->ray1].ray_y = 0;
-    data->ray[data->ray1].tmp_x = 0;
-    data->ray[data->ray1].tmp_y = 0;
-    data->ray[data->ray1].tmp_angle = 0;
     if (dir == 'N' && count == 1)
     {
         data->ray[data->ray1].wall = 'S';
@@ -43,7 +33,6 @@ int init_angle_first_ray(char dir, t_data *data)
         data->ray[data->ray1].rot = 12;
         data->ray[data->ray1].quarter = 4;
     }
-    //printf("okee\n");
     else
         return (1);
     return (0);

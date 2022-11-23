@@ -1,9 +1,9 @@
 
-NO ./get_map_greg/asset/sprites/sloth.xpm
+NO ./get_map_greg/asset/sprites/exit.xpm
 SO ./get_map_greg/asset/sprites/wall.xpm
 
-WE ./get_map_greg/asset/sprites/grass.xpm
-EA ./get_map_greg/asset/sprites/herbs.xpm
+WE ./get_map_greg/asset/sprites/exit.xpm
+EA ./get_map_greg/asset/sprites/exit.xpm
 
 
 F, 30, 45, 221

@@ -8,11 +8,6 @@ int	ft_clic_close(t_data *data)
 
 int	player_move(int keycode, t_data *data)
 {
-	float	pdx;
-	float	pdy;
-
-	pdx = 0;
-	pdy = 0;
 	clear(data);
 	data->n = 0;
 	if (keycode == 123)
@@ -29,6 +24,5 @@ int	player_move(int keycode, t_data *data)
 		left(data);
 	check_cell(data);
 	display_game(data);
-	//display_ray(data, pdx, pdy);
 	return (0);
 }

@@ -1,5 +1,14 @@
 #include "../cube.h"
 
+void init_map_bis(t_data *data)
+{
+	data->map.map_height = data->map.map_size;
+	data->map.map_width = data->map.map_size;
+	data->map.game_display_x = 1280;
+	data->map.game_display_y = 1024;
+	data->map.game_display_start = 400;
+}
+
 void    init_map(t_data *data)
 {
     int i;
@@ -25,4 +34,5 @@ void    init_map(t_data *data)
 	}
 	data->map.map_w = i - 1;
 	data->map.map_h = j - 1;
+	init_map_bis(data);
 }

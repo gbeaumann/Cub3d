@@ -85,14 +85,16 @@ int	find_wall_ray_y1(t_data *data, int x, float proy, int trigger)
 	unsigned int color;
 
 	if (data->ray[data->n].wall == 'N')
-		color = 0x00FF0000;
+		color = get_color_y1(data, proy, trigger, x, 1);
+		//color = 0x00FF0000;
 	else if (data->ray[data->n].wall == 'S')
 		//color = 0xFFFF00;
-		color = get_color_y1(data, proy, trigger, x);
+		color = get_color_y1(data, proy, trigger, x, 0);
 	else if (data->ray[data->n].wall == 'E')
-		color = 0x00FF00F0;
+		//color = 0x00FF00F0;
+		color = get_color_y1(data, proy, trigger, x, 2);
 	else if (data->ray[data->n].wall == 'W')
-		color = 0x00FFFFFF;
+		color = get_color_y1(data, proy, trigger, x, 3);
 	return (color);
 }
 
@@ -101,14 +103,13 @@ int	find_wall_ray_y2(t_data *data, int x, float proy, int trigger)
 	unsigned int color;
 
 	if (data->ray[data->n].wall == 'N')
-		color = 0x00FF0000;
+		color = get_color_y2(data, proy, trigger, x, 1);
 	else if (data->ray[data->n].wall == 'S')
-		//color = 0xFFFF00;
-		color = get_color_y2(data, proy, trigger, x);
+		color = get_color_y2(data, proy, trigger, x, 0);
 	else if (data->ray[data->n].wall == 'E')
-		color = 0x00FF00F0;
+		color = get_color_y2(data, proy, trigger, x, 2);
 	else if (data->ray[data->n].wall == 'W')
-		color = 0x00FFFFFF;
+		color = get_color_y2(data, proy, trigger, x, 3);
 	return (color);
 }
 
@@ -121,14 +122,11 @@ void	print_game(t_data *data)
 	int y2;
 	int x;
 	long double	ray;
-	int	dif;
-	static int  xn = 0;
 	float		proy;
 	static int xpix = 0;
 
 	unsigned int	color_y1;
 	unsigned int	color_y2;
-
 
 	y2 = 0;
 	ray = fix_fish_eye(data);
@@ -136,14 +134,12 @@ void	print_game(t_data *data)
 	ray_w = 0;
 	y = data->map.game_display_y / 2;
 	y2 = data->map.game_display_y / 2;
-	x = 10 * data->n;
+	x = 5 * data->n;
 	wall_height = (ray / (pow(ray, 2))) * 20000;
 	proy = rule_of_three_y(wall_height);
-	if (data->ray[data->n].wall == 'S')
-		printf("proy[%d]: %f\n", data->n, proy);
-	while (ray_w < 10)
+	xpix = find_x_pix(data);
+	while (ray_w < 5)
 	{
-		xpix = get_xval_sprite(data);
 		color_y1 = find_wall_ray_y1(data, x, proy, 1);
 		color_y2 = find_wall_ray_y2(data, x, proy, 1);
 		while (len < wall_height && len < 500)
@@ -161,5 +157,4 @@ void	print_game(t_data *data)
 		y2 = data->map.game_display_y / 2;
 		ray_w++;
 	}
-	//mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win, data->mlx.img, data->map.game_display_start, 0);
 }
