@@ -19,7 +19,7 @@ void	print_walls(t_data *data)
 	int	map_height;
 
 	data->map.small_map = 1;
-	data->map.move_size = 5;
+	data->map.move_size = 1;
 	data->map.map_size = 60;
 	sprite_width = 0;
 	sprite_height = 0;
@@ -80,39 +80,86 @@ void	print_mini_walls(t_data *data)
 	}
 }
 
+int	find_wall_ray_y1(t_data *data, int x, float proy, int trigger)
+{
+	unsigned int color;
+
+	if (data->ray[data->n].wall == 'N')
+		color = 0x00FF0000;
+	else if (data->ray[data->n].wall == 'S')
+		//color = 0xFFFF00;
+		color = get_color_y1(data, proy, trigger, x);
+	else if (data->ray[data->n].wall == 'E')
+		color = 0x00FF00F0;
+	else if (data->ray[data->n].wall == 'W')
+		color = 0x00FFFFFF;
+	return (color);
+}
+
+int	find_wall_ray_y2(t_data *data, int x, float proy, int trigger)
+{
+	unsigned int color;
+
+	if (data->ray[data->n].wall == 'N')
+		color = 0x00FF0000;
+	else if (data->ray[data->n].wall == 'S')
+		//color = 0xFFFF00;
+		color = get_color_y2(data, proy, trigger, x);
+	else if (data->ray[data->n].wall == 'E')
+		color = 0x00FF00F0;
+	else if (data->ray[data->n].wall == 'W')
+		color = 0x00FFFFFF;
+	return (color);
+}
+
 void	print_game(t_data *data)
 {
-	int	wall_height;
+	long double	wall_height;
 	int len;
 	int	ray_w;
 	int y;
 	int y2;
 	int x;
+	long double	ray;
+	int	dif;
+	static int  xn = 0;
+	float		proy;
+	static int xpix = 0;
 
+	unsigned int	color_y1;
+	unsigned int	color_y2;
+
+	static int		trigger = 1;
+
+
+	y2 = 0;
+	ray = fix_fish_eye(data);
 	len = 0;
 	ray_w = 0;
 	y = data->map.game_display_y / 2;
 	y2 = data->map.game_display_y / 2;
-	x = data->map.game_display_x / 2;
-	if (data->n <= data->max/2)
-		x += data->n * 10;
-	else
-		x -= (data->n - (data->max/2)) * 10;
-	printf("ray len: %d\n", data->ray[data->n].ray_len);
-	wall_height = (data->ray[data->n].ray_len / (pow(data->ray[data->n].ray_len, 2))) * 20000;
-	printf("wall: %d\n", wall_height);
-	//mlx_destroy_image(data->mlx.mlx, data->mlx.img);
-	//data->mlx.img = mlx_new_image(data->mlx.mlx, data->map.game_display_x, data->map.game_display_y);
-	//data->mlx.addr = mlx_get_data_addr(data->mlx.img, &data->mlx.bits_per_pixel, &data->mlx.line_length, &data->mlx.endian);
-	//printf ("x: %d\n", x);
+	x = 10 * data->n;
+	wall_height = (ray / (pow(ray, 2))) * 20000;
+	proy = rule_of_three_y(wall_height);
+	/*if (data->ray[data->n].wall == 'S')
+		printf("proy[%d]: %f\n", data->n, proy);*/
 	while (ray_w < 10)
 	{
-		wall_height = ((data->ray[data->n].ray_len - (0.01 * ray_w)) / (pow(data->ray[data->n].ray_len, 2))) * 20000;
-	//	printf ("x + ray: %d\n", x + ray_w);
+		if (trigger == 1)
+		{
+			xpix = get_xval_sprite(data, trigger);
+			trigger = 0;
+		}
+		else
+			xpix = get_xval_sprite(data, trigger);
+		color_y1 = find_wall_ray_y1(data, x, proy, 1);
+		color_y2 = find_wall_ray_y2(data, x, proy, 1);
 		while (len < wall_height && len < 500)
 		{
-			my_mlx_pixel_put(data, x + ray_w, y, 0x00FF0000);
-			my_mlx_pixel_put(data, x + ray_w, y2, 0x00FF0000);
+			my_mlx_pixel_put(data, x + ray_w, y + 1, color_y2);
+			my_mlx_pixel_put(data, x + ray_w, y2, color_y1);
+			color_y1 = find_wall_ray_y1(data, xpix, proy, 0);
+			color_y2 = find_wall_ray_y2(data, xpix, proy, 0);
 			y--;
 			y2++;
 			len++;
@@ -122,5 +169,6 @@ void	print_game(t_data *data)
 		y2 = data->map.game_display_y / 2;
 		ray_w++;
 	}
+	trigger = 1;
 	//mlx_put_image_to_window(data->mlx.mlx, data->mlx.mlx_win, data->mlx.img, data->map.game_display_start, 0);
 }

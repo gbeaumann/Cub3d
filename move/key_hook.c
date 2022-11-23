@@ -6,7 +6,46 @@ int	ft_clic_close(t_data *data)
 	exit (0);
 }
 
-int	player_move(int keycode, t_data *data)
+int	key_press(int keycode, t_data *data)
+{
+	
+	if (keycode == 123)
+		rotation_left(data);
+	if (keycode == 124)
+		rotation_right(data);
+	if (keycode == 13)
+		data->key.w = 1;
+	if (keycode == 1)
+		data->key.s = 1;
+	if (keycode == 2)
+		data->key.d = 1;
+	if (keycode == 0)
+		data->key.a = 1;
+	if (keycode == 53)
+		ft_clic_close(data);
+	return (0);
+}
+
+int	key_release(int keycode, t_data *data)
+{
+	/*if (keycode == 123)
+		data->key.left = 0;
+	if (keycode == 124)
+		data->key.right = 0;*/
+	if (keycode == 13)
+		data->key.w = 0;
+	if (keycode == 1)
+		data->key.s = 0;
+	if (keycode == 2)
+		data->key.d = 0;
+	if (keycode == 0)
+		data->key.a = 0;
+	/*if (keycode == 53)
+		ft_clic_close(data);*/
+	return (0);
+}
+
+int	player_move(t_data *data)
 {
 	float	pdx;
 	float	pdy;
@@ -14,16 +53,23 @@ int	player_move(int keycode, t_data *data)
 	pdx = 0;
 	pdy = 0;
 	clear(data);
-
-	if (keycode == 123)
-		rotation_left(data);
-	if (keycode == 124)
-		rotation_right(data);
-	if (keycode == 13)
+	data->n = 0;
+	/*if (data->key.left == 1)
+		data->key.left = 0;
+	if (data->key.right == 1)
+		data->key.right = 0);*/
+	if (data->key.w == 1)
 		forward(data);
-	if (keycode == 1)
+	if (data->key.s == 1)
 		backward(data);
+	if (data->key.d == 1)
+		right(data);
+	if (data->key.a == 1)
+		left(data);
+	//if (keycode == 53)
+	//	ft_clic_close(data);
 	check_cell(data);
-	display_ray(data, pdx, pdy);
+	display_game(data);
+	//display_ray(data, pdx, pdy);
 	return (0);
 }

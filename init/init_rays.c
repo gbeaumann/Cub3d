@@ -34,6 +34,8 @@ void    init_rays(t_data *data)
     {
         data->ray[data->n].map_check_x = 0;
         data->ray[data->n].map_check_y = 0;
+        data->ray[data->n].map_x = 0;
+        data->ray[data->n].map_y= 0;
         data->ray[data->n].ray_len = 0;
         data->ray[data->n].ray_x = 0;
         data->ray[data->n].ray_y = 0;
@@ -45,10 +47,6 @@ void    init_rays(t_data *data)
         else if (data->n > data->max/2)
             init_left_ray(data, (data->n - data->max/2));
         quarter_calculation(data);
-        /*printf("ray %d quarter: %d\n", data->n, data->ray[data->n].quarter);
-        printf("ray %d angle: %Lf\n", data->n, data->ray[data->n].angle);
-        printf("ray %d rotation: %d\n", data->n, data->ray[data->n].rot);
-        printf("ray %d init tmp angle: %Lf\n", data->n, data->ray[data->n].init_tmp_angle);*/
         data->n++;
     }
 }

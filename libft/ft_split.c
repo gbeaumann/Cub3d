@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gbeauman <marvin@42lausanne.ch>            +#+  +:+       +#+        */
+/*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 09:56:01 by gbeauman          #+#    #+#             */
-/*   Updated: 2021/10/27 10:28:32 by gbeauman         ###   ########.fr       */
+/*   Updated: 2022/11/22 16:48:50 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include	"libft.h"
 
 static size_t	strcount(const char *s, char c)
