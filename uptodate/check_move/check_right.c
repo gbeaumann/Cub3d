@@ -7,8 +7,8 @@ int check_right_one(t_data *data)
 
     tmpx = data->player.cell_x;
     tmpy = data->player.cell_y;
-    tmpx += 5 * cos(data->ray[0].angle);
-    tmpy +=  5 * sin(data->ray[0].angle);
+    tmpx += data->map.move_size * cos(data->ray[0].angle);
+    tmpy +=  data->map.move_size * sin(data->ray[0].angle);
     if(set_check(data, tmpx, tmpy))
         return (1);
     return (0);
@@ -21,8 +21,8 @@ int check_right_two(t_data *data)
 
     tmpx = data->player.cell_x;
     tmpy = data->player.cell_y ;
-    tmpx -= 5 * sin(data->ray[0].tmp_angle);
-    tmpy += 5 * cos(data->ray[0].tmp_angle);
+    tmpx -= data->map.move_size * sin(data->ray[0].tmp_angle);
+    tmpy += data->map.move_size * cos(data->ray[0].tmp_angle);
     if(set_check(data, tmpx, tmpy))
         return (1);
     return (0);
@@ -35,8 +35,8 @@ int check_right_three(t_data *data)
 
     tmpx = data->player.cell_x;
     tmpy = data->player.cell_y;
-    tmpx -= 5 * cos(data->ray[0].tmp_angle);
-    tmpy -= 5 * sin(data->ray[0].tmp_angle);
+    tmpx -= data->map.move_size * cos(data->ray[0].tmp_angle);
+    tmpy -= data->map.move_size * sin(data->ray[0].tmp_angle);
     if(set_check(data, tmpx, tmpy))
         return (1);
     return (0);
@@ -49,8 +49,8 @@ int check_right_four(t_data *data)
 
     tmpx = data->player.cell_x;
     tmpy = data->player.cell_y;
-    tmpx += 5 * sin(data->ray[0].tmp_angle);
-    tmpy -= 5 * cos(data->ray[0].tmp_angle);
+    tmpx += data->map.move_size * sin(data->ray[0].tmp_angle);
+    tmpy -= data->map.move_size * cos(data->ray[0].tmp_angle);
     if(set_check(data, tmpx, tmpy))
         return (1);
     return (0);

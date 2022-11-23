@@ -2,11 +2,18 @@
 
 void init_map_bis(t_data *data)
 {
+	//data->map.small_map = 1;
+	data->map.move_size = 2;
+	data->map.map_size = 60;
+	//sprite_width = 0;
+	//sprite_height = 0;
+	//map_width = 0;
+	//map_height = 0;
 	data->map.map_height = data->map.map_size;
 	data->map.map_width = data->map.map_size;
-	data->map.game_display_x = 1280;
-	data->map.game_display_y = 1024;
-	data->map.game_display_start = 400;
+	data->map.game_display_x = 845;
+	data->map.game_display_y = 995;
+	data->map.game_display_start = 0;
 }
 
 void    init_map(t_data *data)

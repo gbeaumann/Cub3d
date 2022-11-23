@@ -109,6 +109,16 @@ typedef struct s_read_map
 	int		fd;
 }			t_read_map;
 
+typedef struct s_key
+{
+	int	w;
+	int	s;
+	int	a;
+	int	d;
+	int	left;
+	int	right;
+}		t_key;
+
 typedef struct	s_data {
 	
 	t_settings	param;
@@ -116,12 +126,13 @@ typedef struct	s_data {
 	t_minimap	map;
 	t_player	player;
 	t_read_map	gnl;
-	t_ray		ray[131];
+	t_ray		ray[141];
 	t_sprite	sprites[4];
+	t_key		key;
 	int			n;
 	int			max;
 	int			ray1;
-	int			xstart;
+	//int			xstart;
 }				t_data;
 
 int	main(int argc, char **argv);
@@ -176,13 +187,15 @@ char    **ft_split_file(char *str, char c);
 void    free_tab(char **tofree);
 
 //movements and rotations
-int	player_move(int keycode, t_data *data);
+int	player_move(t_data *data);
 int	rotation_left(t_data *data);
 int	rotation_right(t_data *data);
 int	forward(t_data *data);
 int backward(t_data *data);
 int right(t_data *data);
 int left(t_data *data);
+int	key_press(int keycode, t_data *data);
+int	key_release(int keycode, t_data *data);
 
 //check movement (walls)
 int check_right(t_data *data);

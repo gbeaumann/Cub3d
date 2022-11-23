@@ -13,7 +13,7 @@ int find_x_pix(t_data * data)
         wall_pos = data->ray[data->n].imgy;
     if ((int)wall_pos == 0)
         return (0);
-    cal = wall_pos/((float)60/(float)52);
-    color_x = (int)(cal) % 52;
+    cal = wall_pos/((float)60/(float)150);
+    color_x = (int)(cal) % 150;
     return (color_x);
 }

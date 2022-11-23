@@ -1,6 +1,5 @@
 #include "cube.h"
 
-//set the texture for each side 
 int set_sprite(t_data *data)
 {
     int test;
@@ -37,14 +36,3 @@ unsigned int get_color_tex(t_data *data, int x, int y, int s)
 		+ ((g & 0xFF) << 8) + (b & 0xFF));
 }
 
-/*//old version
-unsigned int    get_north_wall_pixel(t_data *data, int x)
-{
-    //static int x = 0;
-    static int y = 0;
-    unsigned int color;
-   
-    y++;
-    color = get_color_tex(data, x, y); 
-    return (color);
-}*/

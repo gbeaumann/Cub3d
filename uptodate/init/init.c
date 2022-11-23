@@ -28,12 +28,23 @@ void	init_player(t_data *data)
 	data->player.y = (data->player.map_y * data->map.map_size) + data->player.cell_y;
 }
 
+void	init_key(t_data *data)
+{
+	data->key.a = 0;
+	data->key.d = 0;
+	data->key.left = 0;
+	data->key.right = 0;
+	data->key.s = 0;
+	data->key.w = 0;
+}
+
 
 int	init(t_data *data)
 {
-	data->max = 131;
+	data->max = 141;
 	data->ray1 = data->max/2;
-	data->xstart = 0;
+	//data->xstart = 0;
+	init_key(data);
 	null_rays(data);
 	init_map(data);
 	init_player(data);

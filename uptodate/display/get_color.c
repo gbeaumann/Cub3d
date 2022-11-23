@@ -13,7 +13,7 @@ unsigned int get_color_y1(t_data *data, float proy, int trigger, int x, int s)
     {
         ydecimal = (proy - (int)proy);
         yn = 1;
-        y1 = 52/2;
+        y1 = 92/2;
         color = get_color_tex(data, x, y1, s); 
         decimal_count = 0;
         decimal_count += ydecimal;
@@ -53,7 +53,7 @@ unsigned int get_color_y2(t_data *data, float proy, int trigger, int x, int s)
     {
         ydecimal = (proy - (int)proy);
         yn = 1;
-        y2 = (52/2);
+        y2 = (92/2);
         color = get_color_tex(data, x, y2, s);
         decimal_count = 0;
         decimal_count += ydecimal;

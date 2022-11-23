@@ -51,12 +51,14 @@ int	main(int argc, char **argv)
 	data.map.map_size = 60;
 
 	data.mlx.mlx = mlx_init();
-	data.mlx.mlx_win = mlx_new_window(data.mlx.mlx, 1920, 1200, "Hello world!");
+	data.mlx.mlx_win = mlx_new_window(data.mlx.mlx, 845, 995, "Cub3d");
 	data.mlx.img = mlx_new_image(data.mlx.mlx, data.map.game_display_x, data.map.game_display_y);
 	data.mlx.addr = mlx_get_data_addr(data.mlx.img, &data.mlx.bits_per_pixel, &data.mlx.line_length, &data.mlx.endian);
 	init(&data);
 
-	mlx_hook(data.mlx.mlx_win, 2, 0, player_move, &data);
+	mlx_hook(data.mlx.mlx_win, 2, 0, key_press, &data);
+	mlx_hook(data.mlx.mlx_win, 3, 0, key_release, &data);
 	mlx_hook(data.mlx.mlx_win, 17, 1L << 5, ft_clic_close, &data);
+	mlx_loop_hook(data.mlx.mlx, player_move, &data);
 	mlx_loop(data.mlx.mlx);
 }
