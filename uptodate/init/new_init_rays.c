@@ -49,5 +49,4 @@ void    init_rays(t_data *data)
         quarter_calculation(data);
         data->n++;
     }
-    printf("quarter ray 0: %d\n", data->ray[0].quarter);
 }

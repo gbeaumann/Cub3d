@@ -46,7 +46,7 @@ int	main(int argc, char **argv)
 	}
 	if (get_settings(argv[1], &data))
 	{
-		free_all(&data);
+		//free_all(&data);
 		return (1);
 	}
 	data.map.small_map = 1;
@@ -58,7 +58,6 @@ int	main(int argc, char **argv)
 	data.mlx.img = mlx_new_image(data.mlx.mlx, data.map.game_display_x, data.map.game_display_y);
 	data.mlx.addr = mlx_get_data_addr(data.mlx.img, &data.mlx.bits_per_pixel, &data.mlx.line_length, &data.mlx.endian);
 	init(&data);
-
 	mlx_hook(data.mlx.mlx_win, 2, 0, key_press, &data);
 	mlx_hook(data.mlx.mlx_win, 3, 0, key_release, &data);
 	mlx_hook(data.mlx.mlx_win, 17, 1L << 5, ft_clic_close, &data);

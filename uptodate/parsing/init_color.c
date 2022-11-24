@@ -92,30 +92,35 @@ int init_color_f(char *new, t_data *data)
 int init_color(char *info, t_data *data)
 {
     char        *new;
+    static int  count = 0;
 
     new = NULL;
     if (info[0] == 'C')
     {
+        count++;
         new = parse_spaces(info, 'C');
         if (init_color_c(new, data))
         {
-            printf("Error in color settings for the ceiling\n");
-            free(new);
-            return (1);
+            printf("Error\nWrong color settings for the ceiling\n");
+            ft_free(new);
+            free_all(data);
+            exit (1);
         }
         free(new);
     }
     if (info[0] == 'F')
     {
+        count++;
         new = parse_spaces(info, 'F');
         if (init_color_f(new, data))
         {
-            printf("Error in color settings for the floor\n");
-            free(new);
-            return (1);
+            printf("Error\nWrong color settings for the floor\n");
+            ft_free(new);
+            free_all(data);
+            exit (1);
         }
         free(new);
     }
-    return (0);
+    return (count);
 }
 

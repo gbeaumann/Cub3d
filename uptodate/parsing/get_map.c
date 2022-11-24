@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:14:12 by mchalard          #+#    #+#             */
-/*   Updated: 2022/11/23 14:14:15 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/11/24 11:01:06 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,8 @@ int get_map(char **tocheck, t_data *data)
     if (check_map_walls(data))
     {
         printf("Error\nThe map is not surrounded by walls\n");
-        return (1);
+        free_all(data);
+        exit (1);
     }
     return (0);
 }

@@ -93,7 +93,6 @@ void	clear(t_data *data)
 		{
 			pdx = sin(data->ray[data->n].angle) * len;
 			pdy = cos(data->ray[data->n].angle) * len;
-			//mlx_pixel_put(data->mlx.mlx, data->mlx.mlx_win, data->player.x + pdx, data->player.y - pdy, 0);
 			len++;
 		}
 		data->n++;

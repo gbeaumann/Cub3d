@@ -38,14 +38,8 @@ int quarter_four_x_dist_long(t_data *data)
 
 int x_ray_len_check(t_data *data)
 {
-	printf("map check x %d: %d\n", data->ray1,data->ray[data->ray1].map_check_x);
-	printf("map check y %d: %d\n", data->ray1, data->ray[data->ray1].map_check_y);
-	printf("check case: %c\n", data->map.map[data->ray[data->ray1].map_check_y][data->ray[data->ray1].map_check_x]);
-	printf("angle: %Lf\n", data->ray[data->ray1].angle);
-	printf("rayx3: %Lf\n", data->ray[data->ray1].ray_x);
 	while (1)
 	{
-		printf("okboucle\n");
 		if (check_map(data))
 			break;
 		if (data->ray[data->n].quarter == 1)

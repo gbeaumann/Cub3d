@@ -83,7 +83,7 @@ void	print_game(t_data *data)
 	{
 		color_y1 = find_wall_ray_y1(data, x, proy, 1);
 		color_y2 = find_wall_ray_y2(data, x, proy, 1);
-		while (len < wall_height && len < 500)
+		while (len < wall_height && len < 498)
 		{
 			my_mlx_pixel_put(data, x + ray_w, y + 1, color_y2);
 			my_mlx_pixel_put(data, x + ray_w, y2, color_y1);

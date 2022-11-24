@@ -18,25 +18,42 @@ int check_settings(t_data *data, char **params)
 {
     int j;
     char *tmp;
+    int text;
+    int color;
 
     j = 0;
+    color = 0;
+    text = 0;
     while ( params[j])
     {
         tmp = parse_spaces(params[j], ' ');
-        if(check_texture(data, tmp))
-            return (1);
-        else if (init_color(tmp, data))
-            return (1);
-        else
+        text = check_texture(data, tmp);
+        color = init_color(tmp, data);
+        if (check_char(tmp))
         {
-            if (check_char(tmp))
-                return(1);
+            free_all(data);
+            exit (1);
+            return(1);
         }
-        if (tmp)
-            free(tmp);
+        ft_free(tmp);
         j++;
     }
+    if (text != 4)
+    {
+        printf("Error\nInvalid number of textures\n");
+        free_all(data);
+        exit (1);
+    }
+    if (color != 2)
+    {
+        printf("Error\nWrong color settings\n");
+        free_all(data);
+        exit (1);
+    }
     if (check_range(data) == 1)
-        return (1);
+    {
+        free_all(data);
+        exit(1);
+    }
     return (0);
 }

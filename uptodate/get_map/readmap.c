@@ -72,7 +72,7 @@ char ** open_map(char *filename)
     }
     else
         printf ("File: %s succesfully opened\n", filename);
-    free(path);
+    ft_free(path);
     map = read_map(fd);
     display_map(map);
     close(fd);   

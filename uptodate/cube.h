@@ -169,7 +169,7 @@ char ** open_map(char *filename);
 //initialization
 int		init(t_data *img);
 int		find_pos(t_data *data);
-void	init_map(t_data *data);
+int	init_map(t_data *data);
 int		exception_len(t_data *data);
 void    init_rays(t_data *data);
 

@@ -11,7 +11,6 @@ int quarter_one_xaxis(t_data *data)
 	tmp_cell_x = data->map.map_size - data->player.cell_x;
 	x = data->map.map_size * (data->player.map_x + 1);
 	data->ray[data->n].tmp_y = data->player.y  - (tmp_cell_x /tan(data->ray[data->n].angle));
-	//data->ray[data->n].ray_x = tmp_cell_x/sin(data->ray[data->n].angle);
 	data->ray[data->n].map_check_x = x /data->map.map_size;
 	data->ray[data->n].map_check_y = data->ray[data->n].tmp_y /data->map.map_size;
 	return (0);
@@ -25,7 +24,6 @@ int quarter_two_xaxis(t_data *data)
 	tmp_cell_x = data->map.map_size - data->player.cell_x;
 	x = data->map.map_size * (data->player.map_x + 1);
 	data->ray[data->n].tmp_y = data->player.y + (tan(data->ray[data->n].tmp_angle) * tmp_cell_x);
-	//data->ray[data->n].ray_x = tmp_cell_x/sin(data->ray[data->n].tmp_angle);
 	data->ray[data->n].map_check_x = x /data->map.map_size;
 	data->ray[data->n].map_check_y = data->ray[data->n].tmp_y /data->map.map_size;
 	return (0);
@@ -37,7 +35,6 @@ int quarter_three_xaxis(t_data *data)
 
 	x = data->map.map_size * (data->player.map_x - 1);
 	data->ray[data->n].tmp_y = data->player.y + (data->player.cell_x / tan(data->ray[data->n].tmp_angle));
-	//data->ray[data->n].ray_x = data->player.cell_x/sin(data->ray[data->n].tmp_angle);
 	data->ray[data->n].map_check_x = x /data->map.map_size;
 	data->ray[data->n].map_check_y = data->ray[data->n].tmp_y /data->map.map_size;
 	return (0);
@@ -49,7 +46,6 @@ int quarter_four_xaxis(t_data *data)
 
 	x = data->map.map_size * (data->player.map_x - 1);
 	data->ray[data->n].tmp_y = data->player.y - (tan(data->ray[data->n].tmp_angle) * data->player.cell_x);
-	//data->ray[data->n].ray_x = data->player.cell_x/sin(data->ray[data->n].tmp_angle);
 	data->ray[data->n].map_check_x = x /data->map.map_size;
 	data->ray[data->n].map_check_y = data->ray[data->n].tmp_y /data->map.map_size;
 	return (0);
@@ -57,7 +53,6 @@ int quarter_four_xaxis(t_data *data)
 
 int check_vert_map(t_data *data)
 {
-	printf("rayx2: %Lf\n", data->ray[data->ray1].ray_x);
 	if (data->ray[data->n].quarter == 1)
 		quarter_one_xaxis(data);
 	if (data->ray[data->n].quarter == 2)

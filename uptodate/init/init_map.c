@@ -16,7 +16,7 @@ void init_map_bis(t_data *data)
 	data->map.game_display_start = 0;
 }
 
-void    init_map(t_data *data)
+int    init_map(t_data *data)
 {
     int i;
 	int	j;
@@ -27,8 +27,9 @@ void    init_map(t_data *data)
 	data->map.map_width = data->map.map_size;
 	if (find_pos(data))
 	{
-		printf("Error in map related to the position of the player\n");
-		return ;
+		printf("Error\nInvalid player position\n");
+		free_all(data);
+		exit (1);
 	}
 	while (data->map.map[j])
 	{
@@ -42,4 +43,5 @@ void    init_map(t_data *data)
 	data->map.map_w = i - 1;
 	data->map.map_h = j - 1;
 	init_map_bis(data);
+	return (0);
 }
