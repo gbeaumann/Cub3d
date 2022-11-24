@@ -6,19 +6,10 @@ int check_char(char *tmp)
             && tmp[0] != 'E' && tmp[0] != 'W' && tmp[0] != 'C' && 
             tmp[0] != 'F' && tmp[0] != '1' && tmp[0] != '0')
     {
-        printf("Error: Invalid character found in file\n");
-        free(tmp);
+        printf("Error\nInvalid character found in file\n");
+        if (tmp)
+            free(tmp);
         return (1);
-    }
-    return (0);
-}
-
-int check_map_start(char * tmp)
-{
-    if (tmp[0] == '1' || tmp[0] == '0')
-    {
-        free(tmp);
-        return(1);
     }
     return (0);
 }
@@ -38,12 +29,11 @@ int check_settings(t_data *data, char **params)
             return (1);
         else
         {
-            if (check_map_start(tmp))
-                break;
-            else if (check_char(tmp))
+            if (check_char(tmp))
                 return(1);
         }
-        free(tmp);
+        if (tmp)
+            free(tmp);
         j++;
     }
     if (check_range(data) == 1)

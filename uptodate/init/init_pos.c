@@ -66,5 +66,8 @@ int find_pos(t_data *data)
         }
         j++;
     }
+    printf("map x: %d\n", data->player.map_x);
+    printf("map y: %d\n", data->player.map_y);
+    printf("wall: %c\n", data->ray[data->ray1].wall);
     return (0);
 }

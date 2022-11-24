@@ -55,6 +55,7 @@ int check_map_walls(t_data *data)
     int j;
 
     j = 0;
+    printf("ok=================\n");
     while (data->map.map[j])
     {
         i = 0;
@@ -66,7 +67,9 @@ int check_map_walls(t_data *data)
             {
                 if (check_walls_i(data, i, j) || 
                 check_walls_j(data, i, j))
+                {
                     return (1);
+                }
             }
             i++;
         }

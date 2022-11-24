@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_map.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/23 14:14:12 by mchalard          #+#    #+#             */
+/*   Updated: 2022/11/23 14:14:15 by mchalard         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../cube.h"
 
 void    fill_spaces(t_data *data)
@@ -60,7 +72,7 @@ int fill_map(char **tocheck, t_data *data)
     return (0);
 }
 
-void    ft_malloc_map(char **tocheck, t_data *data)
+int    ft_malloc_map(char **tocheck, t_data *data)
 {
     int j;
     int tab_size;
@@ -77,19 +89,21 @@ void    ft_malloc_map(char **tocheck, t_data *data)
     data->map.max = j;
     while (j > 0)
     {
-        //printf("tocheck[j]: %s\n", tocheck[j]);
         line_size = check_next_line(tocheck[j]);
         if (line_size < 0)
+        {
+            if (j == data->map.max)
+            {
+                printf("Error\nInvalid line in file\n");
+                return (1);
+            }
             break;
+        }
         else if (line_size > max_size)
             max_size = line_size;
         j--;
         tab_size++;
     }
-    //printf("tab_size: %d\n", tab_size);
-    //printf("max_size: %d\n", max_size);
-    //data->map.map = malloc(sizeof(char *) * tab_size + 1);
-    //data->map.map = NULL;
     data->map.map = ft_calloc(tab_size + 1, sizeof(char *));
     j = 0;
     while (j < tab_size)
@@ -99,15 +113,17 @@ void    ft_malloc_map(char **tocheck, t_data *data)
     }
     data->map.tab_size = tab_size;
     data->map.line_size = max_size;
+    return (0);
 }
 
 int get_map(char **tocheck, t_data *data)
 {
-    ft_malloc_map(tocheck, data);
+    if (ft_malloc_map(tocheck, data))
+        return (1);
     fill_map(tocheck, data);
     if (check_map_walls(data))
     {
-        printf("the map is not surrounded by walls\n");
+        printf("Error\nThe map is not surrounded by walls\n");
         return (1);
     }
     return (0);

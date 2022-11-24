@@ -15,6 +15,7 @@ int	null_rays(t_data *data)
         data->ray[data->n].tmp_y = 0;
 		data->ray[data->n].tmp_angle = 0;
         data->ray[data->n].wall = '\0';
+		data->ray[data->n].quarter = 0;
 		data->n++;
 	}
 	return (1);
@@ -43,7 +44,6 @@ int	init(t_data *data)
 {
 	data->max = 141;
 	data->ray1 = data->max/2;
-	//data->xstart = 0;
 	init_key(data);
 	null_rays(data);
 	init_map(data);

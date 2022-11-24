@@ -13,7 +13,8 @@ int check_map(t_data *data)
 
 int find_ray_len(t_data *data)
 {
-   if (exception_len(data))
+	//printf("ok================2\n");
+   	if (exception_len(data))
 	{
 		cal_x_dist(data);
 		cal_y_dist(data);
@@ -36,5 +37,6 @@ int find_ray_len(t_data *data)
 		else
 			data->ray[data->n].ray_len = data->ray[data->n].ray_x;
 	}
+	printf("ray len middle: %Lf\n", data->ray[71].ray_len);
 	return (0);
 }

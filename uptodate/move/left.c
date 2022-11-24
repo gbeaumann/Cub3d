@@ -48,5 +48,6 @@ int left(t_data *data)
         left_three(data);
     if (data->ray[data->ray1].quarter == 4)
         left_four(data);
+    wall_protect(data);
     return (0);
 }

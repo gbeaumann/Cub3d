@@ -21,7 +21,10 @@ void    init_left_ray(t_data *data, int n)
     data->ray[data->n].rot = data->ray[data->ray1].rot - 1;
     if (data->n == 0)
     {
-        data->ray[data->n].angle = (data->ray[data->ray1].angle) + ((2 * PI) - ((PI/8)));
+        if (data->ray[data->ray1].wall == 'S')
+            data->ray[data->n].angle = (data->ray[data->ray1].angle) + ((2 * PI) - ((PI/8)));
+        else 
+            data->ray[data->n].angle = (data->ray[data->ray1].angle) - ((PI/8));
         data->ray[data->n].init_tmp_angle = 0;
     } 
     else
@@ -46,4 +49,5 @@ void    init_rays(t_data *data)
         quarter_calculation(data);
         data->n++;
     }
+    printf("quarter ray 0: %d\n", data->ray[0].quarter);
 }

@@ -31,6 +31,7 @@ SRC =	main.c\
 		check_move/check_forward.c\
 		check_move/check_backward.c\
 		check_move/map_check.c\
+		check_move/wall_protect.c\
 		ray/ray_len.c\
 		ray/map_check_vert.c\
 		ray/map_check_hor.c\
@@ -41,6 +42,7 @@ SRC =	main.c\
 		ray/fix_fisheye.c\
 		test_pixel.c\
 		display/test_pix_x.c\
+		exit.c\
 		
 FLAGS =	-Wall -Werror -Wextra -g3 -fsanitize=address -fno-omit-frame-pointer
 OBJ =	$(SRC:.c=.o)

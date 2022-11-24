@@ -30,12 +30,9 @@ int	find_wall_ray_y1(t_data *data, int x, float proy, int trigger)
 
 	if (data->ray[data->n].wall == 'N')
 		color = get_color_y1(data, proy, trigger, x, 1);
-		//color = 0x00FF0000;
 	else if (data->ray[data->n].wall == 'S')
-		//color = 0xFFFF00;
 		color = get_color_y1(data, proy, trigger, x, 0);
 	else if (data->ray[data->n].wall == 'E')
-		//color = 0x00FF00F0;
 		color = get_color_y1(data, proy, trigger, x, 2);
 	else if (data->ray[data->n].wall == 'W')
 		color = get_color_y1(data, proy, trigger, x, 3);

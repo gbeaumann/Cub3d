@@ -36,6 +36,8 @@ void    free_tab(char **tofree)
     int j;
 
     j = 0;
+    if (!tofree)
+        return;
     while (tofree[j])
     {
         free(tofree[j]);
@@ -52,7 +54,7 @@ char    *ft_copy_line(char *str, int start, int i, char c)
     int i2;
 
     i2 = 0;
-    cpy = malloc(sizeof(char) * (i - start) + 1);
+    cpy = ft_calloc((i - start) + 1, sizeof(char));
     while (start < i)
     {
         cpy[i2] = str[start];
@@ -63,6 +65,23 @@ char    *ft_copy_line(char *str, int start, int i, char c)
     return (cpy);
 }
 
+void print_map(char **map)
+{
+    int i;
+    int j;
+
+    j = 0;
+    while (map[j])
+    {
+        i = 0;
+        while (map[j][i])
+        {
+            printf("%c", map[j][i]);
+            i++;
+        }
+        j++;
+    }
+}
 
 char    **ft_split_file(char *str, char c)
 {
@@ -81,7 +100,7 @@ char    **ft_split_file(char *str, char c)
             len++;
         i++;
     }
-    tab = malloc(sizeof(char *) * len + 2);
+    tab = ft_calloc(len + 2, sizeof(char *));
     i = 0;
     start = 0;
     while (str[i])
@@ -102,6 +121,5 @@ char    **ft_split_file(char *str, char c)
         else
             i++;
     }
-    tab[j] = 0;
     return (tab);
 }

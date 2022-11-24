@@ -128,5 +128,6 @@ int backward(t_data *data)
         backward_three(data);
     if (data->ray[data->ray1].quarter == 4)
         backward_four(data);
+    wall_protect(data);
     return (0);
 }

@@ -75,6 +75,8 @@ typedef struct s_player {
 	long double cell_y;
 	int			map_x;
 	int			map_y;
+	long double calx;
+	long double caly;
 }				t_player;
 
 typedef struct s_ray {
@@ -185,6 +187,8 @@ char    **ft_split_file(char *str, char c);
 
 //utils
 void    free_tab(char **tofree);
+int free_all(t_data *data);
+void ft_free(char *str);
 
 //movements and rotations
 int	player_move(t_data *data);
@@ -203,6 +207,7 @@ int check_left(t_data *data);
 int check_forward(t_data *data);
 int check_backward(t_data *data);
 int set_check(t_data *data, long double tmpx, long double tmpy);
+int wall_protect (t_data *data);
 
 int check_cell(t_data *data);
 int    cal_x_dist(t_data *data);

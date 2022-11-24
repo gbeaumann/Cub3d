@@ -128,5 +128,6 @@ int forward(t_data *data)
         forward_three(data);
     if (data->ray[data->ray1].quarter == 4)
         forward_four(data);
+    wall_protect(data);
     return (0);
 }
