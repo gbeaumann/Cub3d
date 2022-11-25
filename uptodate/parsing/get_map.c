@@ -6,7 +6,7 @@
 /*   By: mchalard <mchalard@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 14:14:12 by mchalard          #+#    #+#             */
-/*   Updated: 2022/11/24 11:01:06 by mchalard         ###   ########.fr       */
+/*   Updated: 2022/11/24 14:55:59 by mchalard         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,15 @@ void    fill_spaces(t_data *data)
         {
             if (data->map.map[j][i] != '0' && data->map.map[j][i] != '1' &&
             data->map.map[j][i] != 'N' && data->map.map[j][i] != 'S' && 
-            data->map.map[j][i] != 'E' && data->map.map[j][i] != 'W')
+            data->map.map[j][i] != 'E' && data->map.map[j][i] != 'W' && 
+            data->map.map[j][i] != '\n' && data->map.map[j][i] != ' ' && 
+            data->map.map[j][i] != 11 && data->map.map[j][i] != '\0')
+            {
+                printf("Error\nInvalid character found in map\n");
+                free_all(data);
+                exit (1);
+            }
+            if (data->map.map[j][i] == ' ' || data->map.map[j][i] == '\n' || data->map.map[j][i] == '\0')
                 data->map.map[j][i] = '.';
             i++;
         }
@@ -123,7 +131,7 @@ int get_map(char **tocheck, t_data *data)
     fill_map(tocheck, data);
     if (check_map_walls(data))
     {
-        printf("Error\nThe map is not surrounded by walls\n");
+        printf("Error\nThe map is not surrounded by walls,\nthe player is outside the map\nor there is a invalid character in map\n");
         free_all(data);
         exit (1);
     }

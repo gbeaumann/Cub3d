@@ -27,7 +27,7 @@ int    init_map(t_data *data)
 	data->map.map_width = data->map.map_size;
 	if (find_pos(data))
 	{
-		printf("Error\nInvalid player position\n");
+		printf("Error\nInvalid number of players\n");
 		free_all(data);
 		exit (1);
 	}

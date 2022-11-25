@@ -2,6 +2,8 @@
 # define	CUB3D_H
 
 # define	BUFFER_SIZE 10
+# define	IMG_HEIGTH 270
+# define	IMG_LENGTH 300
 
 # include	"./minilibix/mlx.h"
 # include	"./libft/libft.h"
@@ -162,6 +164,8 @@ unsigned int get_color_tex(t_data *data, int x, int y, int s);
 //get color
 unsigned int get_color_y2(t_data *data, float proy, int trigger, int x, int s);
 unsigned int get_color_y1(t_data *data, float proy, int trigger, int x, int s);
+unsigned int get_small_color_y1(t_data *data, float proy, int trigger, int x, int s);
+unsigned int get_small_color_y2(t_data *data, float proy, int trigger, int x, int s);
 int get_xval_sprite(t_data *data);
 
 char ** open_map(char *filename);

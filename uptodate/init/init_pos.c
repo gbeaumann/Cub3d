@@ -47,6 +47,8 @@ int find_pos(t_data *data)
 
     i = 0;
     j = 0;
+    p = 0;
+    printf("p : %d\n", p);
     while (data->map.map[j])
     {
         i = 0;

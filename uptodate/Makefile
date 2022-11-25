@@ -6,6 +6,7 @@ SRC =	main.c\
 		init/init_map.c\
 		init/init_pos.c\
 		init/new_init_rays.c\
+		init/get_sprites.c\
 		parsing/check_setting.c\
 		parsing/init_color.c\
 		parsing/parse_space.c\
@@ -19,6 +20,8 @@ SRC =	main.c\
 		display/print_map.c\
 		display/resize.c\
 		display/get_color.c\
+		display/get_small_color.c\
+		display/test_pix_x.c\
 		move/forward.c\
 		move/backward.c\
 		move/right.c\
@@ -40,8 +43,6 @@ SRC =	main.c\
 		ray/vert_dist.c\
 		ray/hor_dist.c\
 		ray/fix_fisheye.c\
-		test_pixel.c\
-		display/test_pix_x.c\
 		exit.c\
 		
 FLAGS =	-Wall -Werror -Wextra -g3 -fsanitize=address -fno-omit-frame-pointer

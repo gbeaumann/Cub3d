@@ -1,5 +1,20 @@
 #include	"cube.h"
 
+void    check_map_name(char *name)
+{
+    int    i;
+
+    i = 0;
+    while(name[i])
+        i++;
+    if (name[i - 1] != 'b'||  name[i - 2] != 'u' ||
+     name[i - 3] != 'c' || name[i - 4] != '.')
+    {
+        printf("Error\nWrong map name\n");
+        exit (0);
+    }
+}
+
 int	get_settings(char *file, t_data *data)
 {
 	int		fd;
@@ -8,6 +23,7 @@ int	get_settings(char *file, t_data *data)
 	char	**mp_check;
 
 	// init map
+	check_map_name(file);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 	{
@@ -58,6 +74,21 @@ int	main(int argc, char **argv)
 	data.mlx.img = mlx_new_image(data.mlx.mlx, data.map.game_display_x, data.map.game_display_y);
 	data.mlx.addr = mlx_get_data_addr(data.mlx.img, &data.mlx.bits_per_pixel, &data.mlx.line_length, &data.mlx.endian);
 	init(&data);
+	int i;
+	int j;
+
+	j =0 ;
+	while (data.map.map[j])
+	{
+		i = 0;
+		while (data.map.map[j][i])
+		{
+			printf("%c",data.map.map[j][i]);
+			i ++;
+		}
+		printf("\n");
+		j++;
+	}
 	mlx_hook(data.mlx.mlx_win, 2, 0, key_press, &data);
 	mlx_hook(data.mlx.mlx_win, 3, 0, key_release, &data);
 	mlx_hook(data.mlx.mlx_win, 17, 1L << 5, ft_clic_close, &data);

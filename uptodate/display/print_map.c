@@ -28,6 +28,8 @@ int	find_wall_ray_y1(t_data *data, int x, float proy, int trigger)
 {
 	unsigned int color;
 
+	if (proy >= 1)
+	{
 	if (data->ray[data->n].wall == 'N')
 		color = get_color_y1(data, proy, trigger, x, 1);
 	else if (data->ray[data->n].wall == 'S')
@@ -36,6 +38,18 @@ int	find_wall_ray_y1(t_data *data, int x, float proy, int trigger)
 		color = get_color_y1(data, proy, trigger, x, 2);
 	else if (data->ray[data->n].wall == 'W')
 		color = get_color_y1(data, proy, trigger, x, 3);
+	}
+	else if (proy < 1)
+	{
+		if (data->ray[data->n].wall == 'N')
+			color = get_small_color_y1(data, proy, trigger, x, 1);
+		else if (data->ray[data->n].wall == 'S')
+			color = get_small_color_y1(data, proy, trigger, x, 0);
+		else if (data->ray[data->n].wall == 'E')
+			color = get_small_color_y1(data, proy, trigger, x, 2);
+		else if (data->ray[data->n].wall == 'W')
+			color = get_small_color_y1(data, proy, trigger, x, 3);
+	}
 	return (color);
 }
 
@@ -43,14 +57,28 @@ int	find_wall_ray_y2(t_data *data, int x, float proy, int trigger)
 {
 	unsigned int color;
 
-	if (data->ray[data->n].wall == 'N')
-		color = get_color_y2(data, proy, trigger, x, 1);
-	else if (data->ray[data->n].wall == 'S')
-		color = get_color_y2(data, proy, trigger, x, 0);
-	else if (data->ray[data->n].wall == 'E')
-		color = get_color_y2(data, proy, trigger, x, 2);
-	else if (data->ray[data->n].wall == 'W')
-		color = get_color_y2(data, proy, trigger, x, 3);
+	if (proy >= 1)
+	{
+		if (data->ray[data->n].wall == 'N')
+			color = get_color_y2(data, proy, trigger, x, 1);
+		else if (data->ray[data->n].wall == 'S')
+			color = get_color_y2(data, proy, trigger, x, 0);
+		else if (data->ray[data->n].wall == 'E')
+			color = get_color_y2(data, proy, trigger, x, 2);
+		else if (data->ray[data->n].wall == 'W')
+			color = get_color_y2(data, proy, trigger, x, 3);
+	}
+	else if (proy < 1)
+	{
+		if (data->ray[data->n].wall == 'N')
+			color = get_small_color_y2(data, proy, trigger, x, 1);
+		else if (data->ray[data->n].wall == 'S')
+			color = get_small_color_y2(data, proy, trigger, x, 0);
+		else if (data->ray[data->n].wall == 'E')
+			color = get_small_color_y2(data, proy, trigger, x, 2);
+		else if (data->ray[data->n].wall == 'W')
+			color = get_small_color_y2(data, proy, trigger, x, 3);
+	}
 	return (color);
 }
 
