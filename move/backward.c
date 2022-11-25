@@ -3,7 +3,6 @@
 int backward_one(t_data *data)
 {
     float new_angle;
-    int   len;
 
     if (data->ray[data->ray1].angle < PI/4)
     {
@@ -33,7 +32,6 @@ int backward_one(t_data *data)
 int backward_two(t_data *data)
 {
     float new_angle;
-    int   len;
 
     if (data->ray[data->ray1].tmp_angle < PI/4)
     {
@@ -63,7 +61,6 @@ int backward_two(t_data *data)
 int backward_three(t_data *data)
 {
     float new_angle;
-    int   len;
 
     if (data->ray[data->ray1].tmp_angle < PI/4)
     {
@@ -93,7 +90,6 @@ int backward_three(t_data *data)
 int backward_four(t_data *data)
 {
     float new_angle;
-    int   len;
 
     if (data->ray[data->ray1].tmp_angle < PI/4)
     {
@@ -132,5 +128,6 @@ int backward(t_data *data)
         backward_three(data);
     if (data->ray[data->ray1].quarter == 4)
         backward_four(data);
+    wall_protect(data);
     return (0);
 }

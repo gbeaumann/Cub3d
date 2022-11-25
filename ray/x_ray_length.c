@@ -50,6 +50,7 @@ int x_ray_len_check(t_data *data)
 			quarter_three_x_dist_long(data);
 		if (data->ray[data->n].quarter == 4)
 			quarter_four_x_dist_long(data);
+		data->ray[data->n].imgy = data->ray[data->n].tmp_y - (60 * data->ray[data->n].map_check_y);
 	}
 	return (0);
 }

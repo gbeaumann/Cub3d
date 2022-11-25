@@ -54,10 +54,6 @@ int	player_move(t_data *data)
 	pdy = 0;
 	clear(data);
 	data->n = 0;
-	/*if (data->key.left == 1)
-		data->key.left = 0;
-	if (data->key.right == 1)
-		data->key.right = 0);*/
 	if (data->key.w == 1)
 		forward(data);
 	if (data->key.s == 1)
@@ -66,10 +62,7 @@ int	player_move(t_data *data)
 		right(data);
 	if (data->key.a == 1)
 		left(data);
-	//if (keycode == 53)
-	//	ft_clic_close(data);
 	check_cell(data);
 	display_game(data);
-	//display_ray(data, pdx, pdy);
 	return (0);
 }

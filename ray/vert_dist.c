@@ -40,8 +40,6 @@ int cal_x_dist(t_data *data)
 		quarter_three_x_dist(data);
 	if (data->ray[data->n].quarter == 4)
 		quarter_four_x_dist(data);
-	data->ray[data->n].map_x = data->ray[data->n].map_check_x;
-	data->ray[data->n].map_y = data->ray[data->n].map_check_y;
 	check_vert_map(data);
 	return (0);
 }

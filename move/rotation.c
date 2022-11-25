@@ -25,8 +25,6 @@ int	quarter_calculation(t_data *data)
 	return (0);
 }
 
-//test to calculate the rotation of each rays and readjust the value of the angle
-
 int	cal_rot(t_data * data)
 {
 	if (data->ray[data->n].rot == 16 || data->ray[data->n].rot == -16 || data->ray[data->n].rot == 0)

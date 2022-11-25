@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_texture_bis.c                                :+:      :+:    :+:   */
+/*   init_color_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbeauman <gbeauman@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/25 10:27:24 by gbeauman          #+#    #+#             */
-/*   Updated: 2022/11/25 10:29:23 by gbeauman         ###   ########.fr       */
+/*   Created: 2022/11/25 12:01:24 by gbeauman          #+#    #+#             */
+/*   Updated: 2022/11/25 12:01:47 by gbeauman         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../cube.h"
+#include	"../cube.h"
 
-int	check_texture(t_data *data, char *param)
+void	print_color_error(t_data *data, char *new, char *msg)
 {
-	static int	text = 0;
-	int			nbr_text;
-
-	nbr_text = 0;
-	text += check_texture_bis(data, param, nbr_text);
-	return (text);
+	printf("Error\nWrong color settings for the %s\n", msg);
+	ft_free(new);
+	free_all(data);
+	exit (1);
 }

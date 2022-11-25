@@ -13,7 +13,7 @@ int check_map(t_data *data)
 
 int find_ray_len(t_data *data)
 {
-   if (exception_len(data))
+   	if (exception_len(data))
 	{
 		cal_x_dist(data);
 		cal_y_dist(data);
@@ -28,8 +28,6 @@ int find_ray_len(t_data *data)
 		else if (data->ray[data->n].ray_x > data->ray[data->n].ray_y)
 		{
 			data->ray[data->n].ray_len = data->ray[data->n].ray_y;
-			data->ray[data->n].map_x = data->ray[data->n].map_check_x;
-			data->ray[data->n].map_y = data->ray[data->n].map_check_y;
 			if (data->ray[data->n].quarter == 4 || data->ray[data->n].quarter == 1)
 				data->ray[data->n].wall = 'S';
 			else

@@ -61,6 +61,7 @@ int check_vert_map(t_data *data)
 		quarter_three_xaxis(data);
 	if (data->ray[data->n].quarter == 4)
 		quarter_four_xaxis(data);
+	data->ray[data->n].imgy = data->ray[data->n].tmp_y - (60 * data->ray[data->n].map_check_y);
 	x_ray_len_check(data);
 	return (0);
 }
