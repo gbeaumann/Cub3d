@@ -284,4 +284,7 @@ void	ft_split_file_bis(t_split_f *split_f, char c, char **tab, char *str);
 char	*ft_copy_line(char *str, int start, int i, char c);
 void	free_tab(char **tofree);
 
+void	map_empty(void);
+void	dimention_finder(char *map_gnl, t_data *data);
+
 #endif

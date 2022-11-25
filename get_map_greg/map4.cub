@@ -1,0 +1,17 @@
+
+NO ./get_map_greg/asset/sprites/gravel.xpm
+SO ./get_map_greg/asset/sprites/glass.xpm
+
+EA ./get_map_greg/asset/sprites/wood.xpm
+
+WE ./get_map_greg/asset/sprites/brick.xpm
+
+F, 30, 45, 66
+C, 225,30,45
+
+1111111111111111111
+1S01000001001001001
+1001001000001001001
+1000001001001000001
+1001001001000001001
+1111111111111111111

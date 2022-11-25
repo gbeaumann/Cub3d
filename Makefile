@@ -19,6 +19,7 @@ SRC =	main.c\
 		parsing/parsing_utils.c\
 		parsing/parsing_utils_2.c\
 		get_map_greg/get_next_line.c\
+		get_map_greg/get_next_line_utils.c\
 		get_map_greg/check_map_errors.c\
 		display/display.c\
 		display/print_map.c\
